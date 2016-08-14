@@ -489,7 +489,83 @@ myBus.Send("MyMessageQueue", new MyClassB {});
                     Tool: EasyNetQ.Hosepipe utility (Re-Publish) 
                 </section>
             </section>
-            
+            <section>
+                <section>
+                    <h2>RabbitMQ im Cluster</h2>
+                    <img src="images/logo_rabbitmq.png" style="border:0px" alt="Logo of Rabbit MQ"/>
+                </section>
+                <section>
+                    <h3>Voraussetzungen</h3>
+                    Damit die verschienden Nodes verknüpft werden können, müssen sie das gleich ERLANG COOKIE besitzen.
+                </section>
+                <section>
+                    <h3>Beispiel mit Docker</h3>
+                    Hinweis: Sicherheit und eventuelle Firewallanpassung werden außer Acht gelassen.
+                </section>
+                <section>
+                    Start Node1 (Master)
+                     <pre>
+                            <code data-trim contenteditable>
+                                $ docker run -d --hostname rmqNode1 --name rmqNode1 -p 5672:5672 
+    -p 15672:15672 -e RABBITMQ_ERLANG_COOKIE='strenggeheim' 
+    rabbitmq:3-management
+                            </code>
+                        </pre>
+                    Start Node2 (Node mit Persistenz)
+                    <pre>
+                            <code data-trim contenteditable>
+                                $ docker run -d --hostname rmqNode2 --name rmqNode2 -p 5673:5672 
+    -p 1563:15672 -e RABBITMQ_ERLANG_COOKIE='strenggeheim'
+    --link rmqNode1:rmqNode1 rabbitmq:3-management
+                            </code>
+                        </pre>
+                    Start Node3 (RAM Node)
+                    <pre>
+                            <code data-trim contenteditable>
+                                $ docker run -d --hostname rmqNode3 --name rmqNode3 -p 5674:5672 
+    -p 1564:15672 -e RABBITMQ_ERLANG_COOKIE='strenggeheim'
+    --link rmqNode1:rmqNode1 rabbitmq:3-management
+                            </code>
+                        </pre>
+                </section>
+                <section>
+                    Container zur Konfiguration
+                     <pre>
+                        <code data-trim contenteditable>
+                                $ docker run -it --rm --link rmqNode1:rmqNode1 
+    --link rmqNode2:rmqNode2 --link rmqNode3:rmqNode3 
+    -e RABBITMQ_ERLANG_COOKIE='strenggeheim' rabbitmq:3 bash
+                            </code>
+                        </pre>
+                        Hinzufügen Node 2
+                        <pre>
+                        <code data-trim contenteditable>
+                            rabbitmqctl -n rabbit@rmqNode2 stop_app
+rabbitmqctl -n rabbit@rmqNode2 join_cluster rabbit@rmqNode1
+rabbitmqctl -n rabbit@rmqNode2 start_app
+                              </code>
+                        </pre>
+                        Hinzufügen Node 3
+                        <pre>
+                        <code data-trim contenteditable>
+                            rabbitmqctl -n rabbit@rmqNode3 stop_app
+rabbitmqctl -n rabbit@rmqNode3 join_cluster rabbit@rmqNode1 --RAM
+rabbitmqctl -n rabbit@rmqNode3 start_app
+                              </code>
+                        </pre>
+                </section>
+                <section>
+                    <h3>Aktivierung der Hochverfügbarkeit</h3>
+                    <a href="https://www.rabbitmq.com/ha.html" target="_blank">Info</a>
+                        <pre>
+                        <code data-trim contenteditable>
+                         set_policy ha-all "" '{"ha-mode":"all"}'
+                              </code>
+                        </pre>
+
+                </section>
+
+            </section>
             
             
              
