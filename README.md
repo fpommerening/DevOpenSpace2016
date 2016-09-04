@@ -8,7 +8,7 @@ Twitter: http://twitter.com/devopenspace
 Datum: 14.Oktober 2016
 
 #Workshop: Microservices mit .NET und RabbitMQ  
-mit Frank Pommerening <a href="https://twitter.com/fpommerening"><img src="images/TwitterLogo.png" alt="Follow @fpommerening" width=30/></a> <a href=
+mit Frank Pommerening <a href="https://twitter.com/fpommerening"><img src="images/TwitterLogo.png" alt="Follow @fpommerening" width=30/></a>
 
 ## Inhalt
 1. [Zielgruppe](#zielgruppe)
