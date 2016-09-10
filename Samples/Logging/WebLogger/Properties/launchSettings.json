@@ -2,13 +2,11 @@
   "profiles": {
     "web": {
       "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "ConsoleApp4": {
-      "commandName": "Project",
-      "launchUrl": "http://localhost:2305"
     },
     "Weblogger": {
       "commandName": "Project"

@@ -6,7 +6,7 @@ namespace FP.DevSpace2016.Logging.WebLogger
     {
         public HomeModule()
         {
-            Get("/", args => "Hello Developer Open Space 2015");
+            Get("/", args => "Hello Developer Open Space 2016");
         }
     }
 }
