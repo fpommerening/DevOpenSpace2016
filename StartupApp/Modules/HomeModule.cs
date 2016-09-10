@@ -1,4 +1,9 @@
-﻿using Nancy;
+﻿using System;
+using EasyNetQ;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Nancy;
+using StartupApp.Models;
 
 namespace StartupApp.Modules
 {
@@ -6,8 +11,48 @@ namespace StartupApp.Modules
     {
         public HomeModule()
         {
-            Get["/"] = _ => "Hallo World";
+            Get["/", true] = async (x, ct) =>
+            {
+                var model = new Result();
+                try
+                {
+                    using (var myBus = RabbitHutch.CreateBus("host=rabbitmq"))
+                    {
+                        if (myBus.IsConnected)
+                        {
+                            model.RabbitMqState = TestState.Successful;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    model.RabbitMqState = TestState.Failed;
+                }
 
+                try
+                {
+                    var mongoSettings = new MongoClientSettings
+                    {
+                        ConnectTimeout = TimeSpan.FromSeconds(5),
+                        Server = MongoServerAddress.Parse("localhost:27017")
+                    };
+
+                    var client = new MongoClient(mongoSettings);
+
+
+                    var db = client.GetDatabase("MessagingServerDB");
+                    var mongotest = await db.RunCommandAsync((Command<BsonDocument>)"{ping:1}");
+
+                    model.MongoDbState = TestState.Successful;
+                }
+                catch (Exception exception)
+                {
+                    model.MongoDbState = TestState.Failed;
+                }
+
+                return View["Home", model];
+
+            };
         }
     }
 }

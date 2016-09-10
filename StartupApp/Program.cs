@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Nancy;
 using Nancy.Hosting.Self;
 
 namespace StartupApp
@@ -10,6 +11,7 @@ namespace StartupApp
         {
             using (var host = new NancyHost(new Uri("http://localhost:15106")))
             {
+                StaticConfiguration.DisableErrorTraces = false;
                 host.Start();
 
                 while (Console.ReadLine() != "quit") { Thread.Sleep(Int32.MaxValue); }
