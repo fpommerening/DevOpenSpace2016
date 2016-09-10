@@ -1,8 +1,15 @@
 version: '2'
 services: 
-    rabbitmq:
-        image:rabbitmq:3-management
-    mongo:
-        image:mongo:3.2
-    web:
-    
+  rabbitmq:
+    image: rabbitmq:3-management
+
+  mongo:
+    image: mongo:3.2
+
+  web:
+    depends_on:
+      - rabbitmq
+      - mongo
+    image: fpommerening/devopenspace2016:StartUpApp
+    ports:
+      - 15106:15106
