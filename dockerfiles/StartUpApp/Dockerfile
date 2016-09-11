@@ -12,4 +12,4 @@ RUN set -x \
 
 WORKDIR /app/
 EXPOSE 15106
-ENTRYPOINT ["mono", "StartupApp.exe"]wget
+ENTRYPOINT ["mono", "StartupApp.exe"]
