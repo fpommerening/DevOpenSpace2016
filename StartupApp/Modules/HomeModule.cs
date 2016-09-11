@@ -24,8 +24,9 @@ namespace StartupApp.Modules
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     model.RabbitMqState = TestState.Failed;
                 }
 
@@ -34,7 +35,7 @@ namespace StartupApp.Modules
                     var mongoSettings = new MongoClientSettings
                     {
                         ConnectTimeout = TimeSpan.FromSeconds(5),
-                        Server = MongoServerAddress.Parse("localhost:27017")
+                        Server = MongoServerAddress.Parse("mongo:27017")
                     };
 
                     var client = new MongoClient(mongoSettings);
@@ -45,8 +46,9 @@ namespace StartupApp.Modules
 
                     model.MongoDbState = TestState.Successful;
                 }
-                catch (Exception exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     model.MongoDbState = TestState.Failed;
                 }
 
