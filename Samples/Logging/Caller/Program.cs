@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Caller
+namespace FP.DevSpace2016.Logging.Caller
 {
     public class Program
     {
