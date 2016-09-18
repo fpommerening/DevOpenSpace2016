@@ -9,7 +9,6 @@ Um die Zeit effektiv nutzen zu können, testet bitte Dockerumgebung mit der Star
     a) Docker for Windows: Powershell starten
     b) Docker-Toolbox
 
-
 3) Im geklonten Repo in den Ordner dockerfiles/StartupApp wechseln
 
 4) Anwendung per Docker-Compose aktualisieren / starten 
