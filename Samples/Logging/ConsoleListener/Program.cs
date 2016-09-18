@@ -12,7 +12,7 @@ namespace FP.DevSpace2016.Logging.ConsoleListener
 
             try
             {
-                myBus = RabbitHutch.CreateBus("host=localhost");
+                myBus = RabbitHutch.CreateBus("host=RabbitMQ");
                 myBus.Subscribe<LogItem>("ConsoleLogger", log =>
                 {
                     Console.WriteLine("{0:HH:mm:ss.fff} [{1}] {2} -> {3} {4}",
