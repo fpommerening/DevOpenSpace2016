@@ -11,6 +11,7 @@ namespace FP.DevSpace2016.Logging.WebLogger
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
                 .UseStartup<Startup>()
+                .UseUrls("http://0.0.0.0:5000")
                 .Build();
 
             host.Run();

@@ -37,7 +37,7 @@ namespace FP.DevSpace2016.Logging.WebLogger
         private IBus bus = null;
         private IBus GetOrCreateBus()
         {
-            return bus ?? (bus = RabbitHutch.CreateBus("host=localhost"));
+            return bus ?? (bus = RabbitHutch.CreateBus("host=RabbitMQ"));
         }
     }
 }
