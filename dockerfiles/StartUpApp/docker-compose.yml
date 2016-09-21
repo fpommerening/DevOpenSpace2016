@@ -8,6 +8,18 @@ services:
 
   compose:
     image: dduportal/docker-compose
+    
+  weblogger:
+    image: fpommerening/devopenspace2016:logging-web
+    
+  loadbalancer:
+    image: fpommerening/devopenspace2016:logging-loadbalancer
+    
+  console:
+    image: fpommerening/devopenspace2016:logging-console
+    
+  caller:
+    image: fpommerening/devopenspace2016:logging-caller
 
   web:
     depends_on:
