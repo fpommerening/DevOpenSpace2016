@@ -1,3 +1,7 @@
+Create Database "imagedata";
+
+use imagedata;
+
 
 
 CREATE TABLE "User" (
