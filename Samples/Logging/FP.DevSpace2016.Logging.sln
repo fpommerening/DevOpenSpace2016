@@ -3,13 +3,69 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Weblogger", "Weblogger\Weblogger.xproj", "{4AC57E9D-D6D6-4338-92E6-7595989769E2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Weblogger", "src\Weblogger\Weblogger.xproj", "{4AC57E9D-D6D6-4338-92E6-7595989769E2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ConsoleListener", "ConsoleListener\ConsoleListener.xproj", "{B7EE463A-240D-4CE2-9232-61681ECA9A51}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ConsoleListener", "src\ConsoleListener\ConsoleListener.xproj", "{B7EE463A-240D-4CE2-9232-61681ECA9A51}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Contacts", "Contacts\Contacts.xproj", "{E4D0DA3E-5CE5-4FBB-908F-A52AF1F6386D}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Contacts", "src\Contacts\Contacts.xproj", "{E4D0DA3E-5CE5-4FBB-908F-A52AF1F6386D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Caller", "Caller\Caller.xproj", "{D6C9CE41-8932-45F3-A6B0-9FAE8306E140}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Caller", "src\Caller\Caller.xproj", "{D6C9CE41-8932-45F3-A6B0-9FAE8306E140}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D99374D2-14C8-4452-BCE2-CCF2B9CFBB7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dockerfiles", "dockerfiles", "{60906481-D5AA-439B-B471-314B8B175A9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "x86_64", "x86_64", "{F960426F-B65B-4E72-BC85-6BCC2398664A}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\x86_64\weblogger\docker-compose.yml = dockerfiles\x86_64\weblogger\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-caller", "logging-caller", "{81EBB23F-6443-4C90-AC7F-5D2D5940E745}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\x86_64\logging-caller\Dockerfile = dockerfiles\x86_64\logging-caller\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rpi", "rpi", "{DFE140AB-9DCB-46BB-8363-361917A5D2A9}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\rpi\weblogger\docker-compose.yml = dockerfiles\rpi\weblogger\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-caller", "logging-caller", "{17A87D88-9F86-47BF-AC3C-171E7DB77A7D}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\rpi\logging-caller\Dockerfile = dockerfiles\rpi\logging-caller\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-console", "logging-console", "{6EA6B37F-8C22-416E-A3C6-5FD557356453}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\x86_64\logging-console\Dockerfile = dockerfiles\x86_64\logging-console\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-console", "logging-console", "{976502A6-8FD3-4581-9CAB-EC6B8DE97B5C}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\rpi\logging-console\Dockerfile = dockerfiles\rpi\logging-console\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-loadbalancer", "logging-loadbalancer", "{8FA27585-EE00-4F94-AC3E-40E59CF69743}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\x86_64\logging-loadbalancer\Dockerfile = dockerfiles\x86_64\logging-loadbalancer\Dockerfile
+		dockerfiles\x86_64\logging-loadbalancer\nginx.conf = dockerfiles\x86_64\logging-loadbalancer\nginx.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-loadbalancer", "logging-loadbalancer", "{50582DC8-AC6F-4BE4-943C-4E45A3136D81}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\rpi\logging-loadbalancer\Dockerfile = dockerfiles\rpi\logging-loadbalancer\Dockerfile
+		dockerfiles\rpi\logging-loadbalancer\nginx.conf = dockerfiles\rpi\logging-loadbalancer\nginx.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-web", "logging-web", "{B89E8F79-71EF-469A-94E2-F56F37F7A64A}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\rpi\logging-web\Dockerfile = dockerfiles\rpi\logging-web\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging-web", "logging-web", "{AF47E543-48F0-421F-827C-68AFE97E5108}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfiles\x86_64\logging-web\Dockerfile = dockerfiles\x86_64\logging-web\Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +92,21 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4AC57E9D-D6D6-4338-92E6-7595989769E2} = {D99374D2-14C8-4452-BCE2-CCF2B9CFBB7A}
+		{B7EE463A-240D-4CE2-9232-61681ECA9A51} = {D99374D2-14C8-4452-BCE2-CCF2B9CFBB7A}
+		{E4D0DA3E-5CE5-4FBB-908F-A52AF1F6386D} = {D99374D2-14C8-4452-BCE2-CCF2B9CFBB7A}
+		{D6C9CE41-8932-45F3-A6B0-9FAE8306E140} = {D99374D2-14C8-4452-BCE2-CCF2B9CFBB7A}
+		{F960426F-B65B-4E72-BC85-6BCC2398664A} = {60906481-D5AA-439B-B471-314B8B175A9D}
+		{81EBB23F-6443-4C90-AC7F-5D2D5940E745} = {F960426F-B65B-4E72-BC85-6BCC2398664A}
+		{DFE140AB-9DCB-46BB-8363-361917A5D2A9} = {60906481-D5AA-439B-B471-314B8B175A9D}
+		{17A87D88-9F86-47BF-AC3C-171E7DB77A7D} = {DFE140AB-9DCB-46BB-8363-361917A5D2A9}
+		{6EA6B37F-8C22-416E-A3C6-5FD557356453} = {F960426F-B65B-4E72-BC85-6BCC2398664A}
+		{976502A6-8FD3-4581-9CAB-EC6B8DE97B5C} = {DFE140AB-9DCB-46BB-8363-361917A5D2A9}
+		{8FA27585-EE00-4F94-AC3E-40E59CF69743} = {F960426F-B65B-4E72-BC85-6BCC2398664A}
+		{50582DC8-AC6F-4BE4-943C-4E45A3136D81} = {DFE140AB-9DCB-46BB-8363-361917A5D2A9}
+		{B89E8F79-71EF-469A-94E2-F56F37F7A64A} = {DFE140AB-9DCB-46BB-8363-361917A5D2A9}
+		{AF47E543-48F0-421F-827C-68AFE97E5108} = {F960426F-B65B-4E72-BC85-6BCC2398664A}
 	EndGlobalSection
 EndGlobal
