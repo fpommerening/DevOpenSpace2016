@@ -1,6 +1,4 @@
-﻿@using StartupApp.Models
-@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<StartupApp.Models.Result>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de-DE">
 <head>
     <meta charset="UTF-8">
@@ -29,8 +27,8 @@
                     <div class="top-nav s-12 l-10 right">
                         <p class="nav-text">Custom menu text</p>
                         <ul class="right">
-                            <li><a>Home</a></li>
-                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a>Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -43,12 +41,17 @@
                     <div class="margin-bottom">
                         <div class="margin">
                             <article class="s-12">
-                                
-                                <h1>Herzlich Willkommen </h1>
-                                <h2>Verbindung zu RabbitMQ</h2>
-                                <p>@Model.RabbitMqState</p>
-                                <h2>Verbindung zu MongoDB:</h2> 
-                                <p> @Model.MongoDbState</p>
+                                <h1>
+                                    Frank Pommerening
+                                    <br />
+                                </h1>
+                                <h2>
+                                    <a href="mailto:frank@pommerening-online.de?subject=DevOpenSpace 2016">frank@pommerening-online.de</a>
+                                    <br />
+                                    <a href="http://twitter.com/fpommerening" target="_blank">Twitter</a>
+                                    <br />
+                                    <a href="https://www.xing.com/profile/Frank_Pommerening3" target="_blank">XING</a>
+                                </h2>
                             </article>
                         </div>
                     </div>
