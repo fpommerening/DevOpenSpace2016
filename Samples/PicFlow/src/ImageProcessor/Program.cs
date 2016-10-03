@@ -1,17 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EasyNetQ;
+using FP.DevSpace2016.PicFlow.Contracts;
 
-namespace ImageProcessor
+namespace FP.DevSpace2016.PicFlow.ImageProcessor
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hallo Wlet");
-            Console.ReadLine();
+            IBus myBus = null;
+
+            try
+            {
+                myBus = RabbitHutch.CreateBus("host=localhost");
+                var worker = new ImageWorker(myBus);
+                worker.Init();
+                Console.WriteLine("ImageProcessor gestartet...");
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Verbindung ist fehlgeschlagen");
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                myBus?.Dispose();
+            }
+
+            Console.WriteLine("ImageProcessor beendet...");
+
         }
     }
 }

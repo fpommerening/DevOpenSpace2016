@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "buildOptions": {
     "debugType": "portable",
@@ -20,7 +20,13 @@
     "web": "Microsoft.AspNet.Server.Kestrel"
   },
   "frameworks": {
-    "netcoreapp1.0": {}
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Contracts": {
+          "target": "project"
+        }
+      }
+    }
   }
 
 }

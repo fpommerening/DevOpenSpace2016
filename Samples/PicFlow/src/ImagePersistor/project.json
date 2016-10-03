@@ -15,6 +15,11 @@
 
   "frameworks": {
     "netcoreapp1.0": {
+      "dependencies": {
+        "Contracts": {
+          "target": "project"
+        }
+      },
       "imports": "dnxcore50"
     }
   }
