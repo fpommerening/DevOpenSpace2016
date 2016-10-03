@@ -7,9 +7,9 @@ Um die Zeit effektiv nutzen zu können, testet bitte Dockerumgebung mit der Star
 
 2) Docker-Console öffnen und
 
-a) Docker for Windows: Powershell starten
+  a) Docker for Windows: Powershell starten
 
-b) Docker-Toolbox: Eingabeaufforderung cmd starten und Vebindung herstellen (Siehe <a hrfe="https://docs.docker.com/toolbox/toolbox_install_windows/#step-3-verify-your-installation" target"_blank">Docs</a>)
+  b) Docker-Toolbox: Eingabeaufforderung cmd starten und Vebindung herstellen (Siehe <a hrfe="https://docs.docker.com/toolbox/toolbox_install_windows/#step-3-verify-your-installation" target"_blank">Docs</a>)
 
 3) Im geklonten Repo in den Ordner dockerfiles/StartupApp wechseln
 
@@ -23,7 +23,7 @@ b) Docker-Toolbox: Eingabeaufforderung cmd starten und Vebindung herstellen (Sie
 
 5) Webbrowser starten und die Seite <a href ="http://localhost:15106">http://localhost:15106</a> öffnen. 
 Wenn alles korrekt gestartet ist siehst du folgende Seite.
-<img src="images/startupApp.png" alt="Screenshot Startup-App"/>
+<img src="images/startupApp.PNG" alt="Screenshot Startup-App"/>
 
 6) Anwendung mit CTRL + C beenden
 
