@@ -28,4 +28,4 @@ Wenn alles korrekt gestartet ist siehst du folgende Seite.
 
 	docker-compose rm
 	
-	Hinweis: die Images bleiben auf dem System erhalten
+Hinweis: die Images bleiben auf dem System erhalten
