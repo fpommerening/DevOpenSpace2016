@@ -15,7 +15,7 @@ Um die Zeit effektiv nutzen zu können, testet bitte Dockerumgebung mit der Star
 
 	docker-compose pull
 
-<b> WICHTIG: im Zuge des Starts werden alle notwendigen Dockerimages für den Workshop heruntergeladen. Dies umfallt etwa 4 GB und kann abhängig von Internetgeschwindigkeit etwas Zeit in Anspruch nehmen.
+<b> WICHTIG: im Zuge des Starts werden alle notwendigen Dockerimages für den Workshop heruntergeladen. Dies umfallt etwa 4 GB und kann abhängig von Internetgeschwindigkeit etwas Zeit in Anspruch nehmen.</b>
 	
 	docker-compose up
 
@@ -28,4 +28,4 @@ Wenn alles korrekt gestartet ist siehst du folgende Seite.
 
 	docker-compose rm
 	
-	Hinweis: die Images bleiben auf dem System erhalten
+Hinweis: die Images bleiben auf dem System erhalten
