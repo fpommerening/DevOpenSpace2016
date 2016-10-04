@@ -9,7 +9,7 @@ Um die Zeit effektiv nutzen zu können, testet bitte eure Dockerumgebung mit der
 
   a) Docker for Windows: Powershell starten
 
-  b) Docker-Toolbox: Eingabeaufforderung cmd starten und Vebindung herstellen (Siehe <a hrfe="https://docs.docker.com/toolbox/toolbox_install_windows/#step-3-verify-your-installation" target"_blank">Docs</a>)
+  b) Docker-Toolbox: Eingabeaufforderung cmd starten und Verbindung herstellen (Siehe <a hrfe="https://docs.docker.com/toolbox/toolbox_install_windows/#step-3-verify-your-installation" target"_blank">Docs</a>)
 
 3) Im geklonten Repo in den Ordner dockerfiles/StartupApp wechseln
 
@@ -17,7 +17,7 @@ Um die Zeit effektiv nutzen zu können, testet bitte eure Dockerumgebung mit der
 
 	docker-compose pull
 
-<b> WICHTIG: im Zuge des Starts werden alle notwendigen Dockerimages für den Workshop heruntergeladen. Dies umfallt etwa 2 GB und kann abhängig von Internetgeschwindigkeit etwas Zeit in Anspruch nehmen.</b>
+<b> WICHTIG: im Zuge des Starts werden alle notwendigen Dockerimages für den Workshop heruntergeladen. Dieses umfasst etwa 2 GB und kann abhängig von der Internetgeschwindigkeit etwas Zeit in Anspruch nehmen.</b>
 	
 	docker-compose up
 
