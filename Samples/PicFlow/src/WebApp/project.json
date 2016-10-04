@@ -14,7 +14,8 @@
     "Microsoft.AspNetCore.Owin": "1.0.0",
     "Nancy": "2.0.0-barneyrubble",
     "EasyNetQ": "2.0.2-netcore0001",
-    "MongoDB.Driver": "2.3.0"
+    "MongoDB.Driver": "2.3.0",
+    "MongoDB.Bson": "2.3.0"
   },
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel"

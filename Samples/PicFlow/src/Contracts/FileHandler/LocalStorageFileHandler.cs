@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace FP.DevSpace2016.PicFlow.WebApp.Handlers
+namespace FP.DevSpace2016.PicFlow.Contracts.FileHandler
 {
-    public class LocalStorageUploadHandler :  IFileUploadHandler
+    public class LocalStorageFileHandler
     {
         public async Task<FileUploadResult> HandleUpload(string fileName, System.IO.Stream stream)
         {

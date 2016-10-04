@@ -19,6 +19,7 @@
         "Contracts": {
           "target": "project"
         }
+
       },
       "imports": "dnxcore50"
     }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using EasyNetQ;
 using FP.DevSpace2016.PicFlow.Contracts;
+using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 
 namespace FP.DevSpace2016.PicFlow.ImageProcessor
 {
@@ -23,13 +21,19 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
             _sub = _bus.SubscribeAsync<Contracts.ImageProcessingJob>("Sub1", job => WorkImage(job));
         }
 
-        private Task WorkImage(ImageProcessingJob job)
+        private async Task WorkImage(ImageProcessingJob job)
         {
             ImageSaveJob nextJob = new ImageSaveJob();
+
+            MongoDbFileHandler fileHandler = new MongoDbFileHandler("mongodb://localhost");
+            var file = await fileHandler.GetMessageObject<DtoImage>(job.SourceId);
+
+            Console.WriteLine(file.FileName);
+
             Console.WriteLine($"Proc {job.SourceId}");
 
             nextJob.Ids = job.SourceId;
-            return _bus.PublishAsync(nextJob);
+            await _bus.PublishAsync(nextJob);
         }
 
         public void Dispose()
