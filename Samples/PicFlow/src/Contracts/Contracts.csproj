@@ -41,6 +41,12 @@
   <ItemGroup>
     <Compile Include="AuthorizationRequest.cs" />
     <Compile Include="AuthorizationResponse.cs" />
+    <Compile Include="DtoImage.cs" />
+    <Compile Include="Dto\DtoMessage.cs" />
+    <Compile Include="FileHandler\FileUploadResult.cs" />
+    <Compile Include="FileHandler\IFileHandler.cs" />
+    <Compile Include="FileHandler\LocalStorageFileHandler.cs" />
+    <Compile Include="FileHandler\MongoDbFileHandler.cs" />
     <Compile Include="ImageProcessingJob.cs" />
     <Compile Include="ImageSaveJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FP.DevSpace2016.PicFlow.WebApp.Handlers;
+﻿using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 using FP.DevSpace2016.PicFlow.WebApp.Models;
 using Nancy;
 using Nancy.ModelBinding;
@@ -11,18 +7,15 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {
     public class ImageModule : NancyModule
     {
-        private readonly IFileUploadHandler _fileUploadHandler;
+        private readonly IFileHandler _fileUploadHandler;
         private readonly MessageRepository _messageRepository;
 
-        public ImageModule(IFileUploadHandler fileUploadHandler)
+        public ImageModule(IFileHandler fileUploadHandler)
         {
             _fileUploadHandler = fileUploadHandler;
             _messageRepository = new MessageRepository();
 
-            Get("/", args =>
-            {
-                return View["ImageRequest"];
-            });
+            Get("/", args => View["ImageRequest"]);
 
 
             Post("/imagerequest", async args =>
