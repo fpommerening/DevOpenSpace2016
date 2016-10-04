@@ -1,7 +1,7 @@
 # Startup-App
 
-Im Workshop Microservices mit .NET und RabbitMQ wird Docker zur Bereitstellung der Umgebungen verwendet.
-Um die Zeit effektiv nutzen zu können, testet bitte Dockerumgebung mit der Startup-App vorher.
+Im Workshop <i>Microservices mit .NET und RabbitMQ</i> wird Docker zur Bereitstellung der Umgebungen verwendet.
+Um die Zeit effektiv nutzen zu können, testet bitte eure Dockerumgebung mit der Startup-App vorher.
 
 1) Git-Repo <a href="https://github.com/fpommerening/DevOpenSpace2016.git">DevOpenSpace2016</a> klonen 
 
@@ -22,7 +22,7 @@ Um die Zeit effektiv nutzen zu können, testet bitte Dockerumgebung mit der Star
 	docker-compose up
 
 5) Webbrowser starten und die Seite <a href ="http://localhost:15106">http://localhost:15106</a> öffnen. 
-Wenn alles korrekt gestartet ist siehst du folgende Seite.
+Wenn alles korrekt gestartet ist, siehst du folgende Seite.
 <img src="images/startupApp.PNG" alt="Screenshot Startup-App"/>
 
 6) Anwendung mit CTRL + C beenden
