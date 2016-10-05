@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace FP.DevSpace2016.PicFlow.Contracts
 {
-    public class ImageSaveJob
+    public class ImageUploadJob
     {
-        public string Id { get; set; }
     }
 }

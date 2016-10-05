@@ -49,6 +49,7 @@
     <Compile Include="FileHandler\MongoDbFileHandler.cs" />
     <Compile Include="ImageProcessingJob.cs" />
     <Compile Include="ImageSaveJob.cs" />
+    <Compile Include="ImageUploadJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
