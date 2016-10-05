@@ -8,5 +8,6 @@ namespace FP.DevSpace2016.PicFlow.Contracts
 {
     public class ImageUploadJob
     {
+        public string ImageId { get; set; }
     }
 }

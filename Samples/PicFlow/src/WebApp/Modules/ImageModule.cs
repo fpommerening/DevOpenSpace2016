@@ -27,7 +27,13 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                 {
                     SourceId = uploadResult.Identifier
                 };
-                await _messageRepository.SendImageProcessingJob(job);
+                var job2 = new Contracts.ImageUploadJob
+                {
+                    ImageId = uploadResult.Identifier
+                };
+
+               // await _messageRepository.SendImageProcessingJob(job);
+                await _messageRepository.SendUploadJob(job2);
 
                 return HttpStatusCode.OK;
 

@@ -18,6 +18,11 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
             return GetOrCreateBus().PublishAsync(job);
         }
 
+        public Task SendUploadJob(Contracts.ImageUploadJob job)
+        {
+            return GetOrCreateBus().PublishAsync(job);
+        }
+
         private IBus bus = null;
         private IBus GetOrCreateBus()
         {
