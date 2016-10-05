@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "Contracts/1.0.0": {
+      "type": "project",
+      "framework": ".NETStandard,Version=v1.5",
+      "compile": {
+        "bin/Debug/Contracts.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/Contracts.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Contracts.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

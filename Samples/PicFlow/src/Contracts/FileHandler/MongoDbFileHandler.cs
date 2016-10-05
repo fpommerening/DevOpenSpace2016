@@ -20,10 +20,7 @@ namespace FP.DevSpace2016.PicFlow.Contracts.FileHandler
 
         public async Task<FileUploadResult> HandleUpload(string fileName, Stream inputStream)
         {
-            var db = GetMongoDatabase();
-            var collection = db.GetCollection<DtoMessage>("Messages");
-
-            var dto = new DtoMessage();
+          
             var dtoImages = new DtoImage();
             var bytes = new byte[16 * 1024];
             using (var memoryStream = new MemoryStream())
@@ -36,10 +33,17 @@ namespace FP.DevSpace2016.PicFlow.Contracts.FileHandler
                 dtoImages.Data = memoryStream.ToArray();
             }
             dtoImages.FileName = fileName;
-            dto.Object = dtoImages;
+            return new FileUploadResult {Identifier  = await SaveMessageObject(dtoImages) };
+            
+        }
 
+        public async Task<string> SaveMessageObject<T>(T msg) where T : class
+        {
+            var db = GetMongoDatabase();
+            var collection = db.GetCollection<DtoMessage>("Messages");
+            var dto = new DtoMessage {Object = msg};
             await collection.InsertOneAsync(dto);
-            return new FileUploadResult { Identifier = dto.Id.ToString() };
+            return dto.Id.ToString();
         }
 
         public async Task<T> GetMessageObject<T>(string msgId) where T : class
