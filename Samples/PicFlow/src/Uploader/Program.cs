@@ -12,7 +12,7 @@ namespace FP.DevSpace2016.PicFlow.Uploader
             try
             {
                 myBus = RabbitHutch.CreateBus("host=localhost");
-                using (var transmittter = new Transmitter(myBus))
+                using (var transmittter = new Transmitter(myBus, "mongodb://localhost"))
                 {
                     transmittter.Init();
                     Console.WriteLine("Uploader gestartet...");

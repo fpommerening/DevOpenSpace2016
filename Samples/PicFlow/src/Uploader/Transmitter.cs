@@ -1,21 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using EasyNetQ;
 using FP.DevSpace2016.PicFlow.Contracts;
+using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 
 namespace FP.DevSpace2016.PicFlow.Uploader
 {
     public class Transmitter : IDisposable
     {
         private readonly IBus _myBus;
+        private readonly string _mongoConnectionString;
         private IDisposable _subscription;
 
-        public Transmitter(IBus myBus)
+        public Transmitter(IBus myBus, string mongoConnectionstring)
         {
             _myBus = myBus;
+            _mongoConnectionString = mongoConnectionstring;
         }
 
         public void Init()
@@ -23,13 +26,26 @@ namespace FP.DevSpace2016.PicFlow.Uploader
             _subscription = _myBus.SubscribeAsync<ImageUploadJob>("UploadSubscription", job => UploadImage(job));
         }
 
-        private Task UploadImage(ImageUploadJob job)
+        private async Task UploadImage(ImageUploadJob job)
         {
-            HttpClient client = new HttpClient();
-            var contect = new MultipartFormDataContent();
-            //contect.
-            client.PostAsync("http://extweb/api/postimage", null);
-            return null;
+            
+            var handler = new MongoDbFileHandler(_mongoConnectionString);
+            var image = await handler.GetMessageObject<DtoImage>(job.ImageId);
+            var client = new HttpClient();
+            using (var inputstream = new MemoryStream(image.Data))
+            {
+                var contect = new MultipartFormDataContent
+                {
+                    {new StringContent("Hallo Welt"), "msg"},
+                    {new StreamContent(inputstream)}
+                };
+                await client.PostAsync("http://localhost:8000/api/postimage", contect);
+            }
+               
+            
+
+
+           
         }
 
         public void Dispose()
