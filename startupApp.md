@@ -17,7 +17,7 @@ Um die Zeit effektiv nutzen zu können, testet bitte eure Dockerumgebung mit der
 
 	docker-compose pull
 
-<b> WICHTIG: im Zuge des Starts werden alle notwendigen Dockerimages für den Workshop heruntergeladen. Dies umfallt etwa 2 GB und kann abhängig von Internetgeschwindigkeit etwas Zeit in Anspruch nehmen.</b>
+<b> WICHTIG: im Zuge des Starts werden alle notwendigen Dockerimages für den Workshop heruntergeladen. Dies umfasst etwa 2 GB und kann abhängig von Internetgeschwindigkeit etwas Zeit in Anspruch nehmen.</b>
 	
 	docker-compose up
 
