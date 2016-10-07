@@ -7,5 +7,6 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Models
 {
     public class ImageItem
     {
+        public string Id { get; set; }
     }
 }

@@ -1,0 +1,4 @@
+﻿﻿@Each
+ID: @Current.Id <br/>
+<br/>
+@EndEach
