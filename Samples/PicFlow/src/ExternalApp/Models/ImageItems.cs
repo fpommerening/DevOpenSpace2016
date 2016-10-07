@@ -4,10 +4,32 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Models
 {
     public class ImageItems
     {
-        public int Start { get; set; }
+        public ImageItems()
+        {
+            Entries = new List<ImageItem>();
+            PreviousStartIndex = -1;
+            PreviousEndIndex = -1;
+            NextStartIndex = -1;
+            NextEndIndex = -1;
+        }
 
-        public int End { get; set; }
+        public bool ShowPrevious => PreviousStartIndex > -1 && PreviousEndIndex > -1;
 
-        public List<ImageItem> Images { get; set; }
+        public bool ShowNext => NextStartIndex > -1 && NextEndIndex > -1;
+
+        public int PreviousStartIndex { get; set; }
+
+        public int PreviousEndIndex { get; set; }
+
+        public int CurrentStartIndex { get; set; }
+
+        public int CurrentEndIndex { get; set; }
+
+        public int NextStartIndex { get; set; }
+
+        public int NextEndIndex { get; set; }
+
+        public List<ImageItem> Entries { get; }
     }
+
 }

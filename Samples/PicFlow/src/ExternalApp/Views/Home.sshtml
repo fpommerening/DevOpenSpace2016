@@ -6,11 +6,20 @@
                 <div class="line">
                     <div class="margin-bottom">
                         <div class="margin">
+ @Partial['entries', Model.Entries];
+
+@If.ShowPrevious
+                            Prev: <a href="/@Model.PreviousStartIndex/@Model.PreviousEndIndex">Prev</a>
+@EndIf
 
 
-Start: @Model.Start
-Ende: @Model.End
 
+Start: @Model.CurrentStartIndex
+Ende: @Model.CurrentEndIndex
+
+                            @If.ShowNext
+                            Next: <a href="/@Model.NextStartIndex/@Model.NextEndIndex">Next</a>
+                            @EndIf
 
                         </div>
                     </div>
