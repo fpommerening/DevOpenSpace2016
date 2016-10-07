@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using FP.DevSpace2016.PicFlow.ExternalApp.Models;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace FP.DevSpace2016.PicFlow.ExternalApp.Modules
 {
@@ -10,8 +10,8 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Modules
         {
             Post("/postimage", args =>
             {
-                Console.WriteLine(this.Request.Files.Count());
-                return "Hallo Welt";
+                var apiUpload = this.Bind<ApiUpload>();
+                return HttpStatusCode.OK;
             });
         }
     }

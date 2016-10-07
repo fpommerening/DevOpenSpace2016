@@ -28,24 +28,20 @@ namespace FP.DevSpace2016.PicFlow.Uploader
 
         private async Task UploadImage(ImageUploadJob job)
         {
-            
+
             var handler = new MongoDbFileHandler(_mongoConnectionString);
             var image = await handler.GetMessageObject<DtoImage>(job.ImageId);
-            var client = new HttpClient();
-            using (var inputstream = new MemoryStream(image.Data))
+
+            using (var client = new HttpClient())
+            using (var content = new MultipartFormDataContent())
             {
-                var contect = new MultipartFormDataContent
-                {
-                    {new StringContent("Hallo Welt"), "msg"},
-                    {new StreamContent(inputstream)}
-                };
-                await client.PostAsync("http://localhost:8000/api/postimage", contect);
+                content.Add(new StringContent("Jetzt geht es los"), "User");
+                content.Add(new StringContent("Jetzt geht es los2"), "Message");
+                content.Add(new StringContent("ajskdjkasjdkja"), "APIKEY");
+                content.Add(new ByteArrayContent(image.Data), "Image", image.FileName);
+                await client.PostAsync("http://localhost:8000/api/postimage", content);
             }
-               
-            
 
-
-           
         }
 
         public void Dispose()
