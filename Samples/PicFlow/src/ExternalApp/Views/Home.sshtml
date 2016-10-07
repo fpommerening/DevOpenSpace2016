@@ -1,0 +1,20 @@
+﻿@Master['MasterPage']
+
+@Section['Content']
+
+ <div id="first-block">
+                <div class="line">
+                    <div class="margin-bottom">
+                        <div class="margin">
+
+
+Start: @Model.Start
+Ende: @Model.End
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+@EndSection

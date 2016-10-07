@@ -3,7 +3,7 @@
   "buildOptions": {
     "debugType": "portable",
     "emitEntryPoint": true,
-    "copyToOutput": { "include": "Views" }
+    "copyToOutput": { "include": [ "Views","js","img", "css" ] }
   },
   "dependencies": {
     "Microsoft.NETCore.App": {
