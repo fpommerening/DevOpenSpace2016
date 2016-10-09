@@ -15,7 +15,18 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
             _fileUploadHandler = fileUploadHandler;
             _messageRepository = messageRepository;
 
-            Get("/imagerequest", args => View["ImageRequest"]);
+            Get("/imagerequest", args =>
+            {
+                var identity = this.Context.CurrentUser;
+                if (identity == null)
+                {
+                    return View["Login"];
+                }
+                else
+                {
+                    return View["ImageRequest"];
+                }
+            });
 
             Post("/imagerequest", async args =>
             {

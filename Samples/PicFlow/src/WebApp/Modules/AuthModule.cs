@@ -54,6 +54,24 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                         cycle = cycle
                     });
             } );
+
+            Get("secure", args =>
+            {
+                var identity = this.Context.CurrentUser;
+                if (identity != null)
+                {
+                    return Response.AsJson(new { });
+                }
+                return new Response {StatusCode = HttpStatusCode.Unauthorized};
+            });
+
+            Delete("/", parameter =>
+            {
+                var sessionId = (string)this.Request.Form.sessionId;
+                var sessionIdAsGuid = Guid.Parse(sessionId);
+                authRepo.DeleteSession(sessionIdAsGuid);
+                return Response.AsJson(new { });
+            });
         }
 
         private static string HashPassword(string password)
