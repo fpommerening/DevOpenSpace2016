@@ -11,13 +11,20 @@ namespace FP.DevSpace2016.PicFlow.Authorization
             try
             {
                 myBus = RabbitHutch.CreateBus("host=localhost");
-                myBus.Subscribe<Contracts.AuthorizationRequest>("Auth", request =>
+                myBus.Subscribe<Contracts.AuthenticationRequest>("Auth", request =>
                 {
-                    var response = new Contracts.AuthorizationResponse
+                    var response = new Contracts.AuthenticationResponse
                     {
                         Id = request.Id,
-                        UserId = Guid.Parse("34D012C4-2572-4481-84D6-3AF1FDA3A756")
                     };
+
+                    if (request.UserName == "frank")
+                    {
+                        response.UserId = Guid.Parse("34D012C4-2572-4481-84D6-3AF1FDA3A756");
+                        response.User = "Frank Pommerening";
+                        response.IsValid = true;
+                    }
+                  
                     myBus.Publish(response);
                 });
 

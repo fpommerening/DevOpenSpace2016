@@ -1,5 +1,7 @@
-﻿using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
-
+﻿using System;
+using EasyNetQ;
+using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
+using FP.DevSpace2016.PicFlow.WebApp.Modules;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
@@ -21,8 +23,17 @@ namespace FP.DevSpace2016.PicFlow.WebApp
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
+            container.Register<IBus>(RabbitHutch.CreateBus("host=localhost"));
+            //var authRepo = new AuthenticationRepository(bus);
+            container.Register<AuthenticationRepository>().AsSingleton();
+            
             container.Register<IFileHandler, MongoDbFileHandler>(new MongoDbFileHandler("mongodb://localhost"));
             base.ApplicationStartup(container, pipelines);
+        }
+
+        private IBus CreateBus(TinyIoCContainer tinyIoCContainer, NamedParameterOverloads namedParameterOverloads)
+        {
+            return RabbitHutch.CreateBus("host=localhost");
         }
     }
 }

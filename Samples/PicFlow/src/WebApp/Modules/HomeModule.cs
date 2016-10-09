@@ -10,7 +10,11 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
     {
         public HomeModule()
         {
+            Get("/", args => View["Home"]);
+
             Get("/contact", args => View["Contact"]);
+
+            Get("/login", args=> View["Login"]);
         }
     }
 }

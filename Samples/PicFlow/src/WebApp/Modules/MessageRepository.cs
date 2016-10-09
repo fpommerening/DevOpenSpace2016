@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using EasyNetQ;
 
 namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {
     public class MessageRepository
     {
-        public MessageRepository()
+        private readonly IBus _bus = null;
+
+        public MessageRepository(IBus bus)
         {
-            
+            _bus = bus;
         }
 
         public Task SendImageProcessingJob(Contracts.ImageProcessingJob job)
         {
-            return GetOrCreateBus().PublishAsync(job);
+            return _bus.PublishAsync(job);
         }
 
         public Task SendUploadJob(Contracts.ImageUploadJob job)
         {
-            return GetOrCreateBus().PublishAsync(job);
-        }
-
-        private IBus bus = null;
-        private IBus GetOrCreateBus()
-        {
-            return bus ?? (bus = RabbitHutch.CreateBus("host=localhost"));
+            return _bus.PublishAsync(job);
         }
     }
 }

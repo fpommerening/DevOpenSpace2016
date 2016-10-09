@@ -10,13 +10,12 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
         private readonly IFileHandler _fileUploadHandler;
         private readonly MessageRepository _messageRepository;
 
-        public ImageModule(IFileHandler fileUploadHandler)
+        public ImageModule(IFileHandler fileUploadHandler, MessageRepository messageRepository)
         {
             _fileUploadHandler = fileUploadHandler;
-            _messageRepository = new MessageRepository();
+            _messageRepository = messageRepository;
 
-            Get("/", args => View["ImageRequest"]);
-
+            Get("/imagerequest", args => View["ImageRequest"]);
 
             Post("/imagerequest", async args =>
             {
@@ -32,7 +31,7 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                     ImageId = uploadResult.Identifier
                 };
 
-               // await _messageRepository.SendImageProcessingJob(job);
+                // await _messageRepository.SendImageProcessingJob(job);
                 await _messageRepository.SendUploadJob(job2);
 
                 return HttpStatusCode.OK;
