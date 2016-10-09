@@ -39,7 +39,7 @@
 						if (typeof response.apiKey !== "undefined")
 						{
 							 ApiToken.Set(response.username, response.apiKey, response.rememberMe);
-							 window.location = "/imagerequest";
+							 window.location = "/";
 						}
 						else
 						{

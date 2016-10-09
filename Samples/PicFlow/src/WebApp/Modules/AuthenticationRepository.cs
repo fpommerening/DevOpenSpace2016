@@ -51,5 +51,13 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                 return null;
             return userSessions[sessionId];
         }
+
+        public void DeleteSession(Guid sessionId)
+        {
+            if (userSessions.ContainsKey(sessionId))
+            {
+                userSessions.Remove(sessionId);
+            }
+        }
     }
 }

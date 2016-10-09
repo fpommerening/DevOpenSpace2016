@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Security.Claims;
+using System.Security.Principal;
 using EasyNetQ;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 using FP.DevSpace2016.PicFlow.WebApp.Modules;
 using Nancy;
+using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.TinyIoc;
@@ -24,16 +27,32 @@ namespace FP.DevSpace2016.PicFlow.WebApp
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             container.Register<IBus>(RabbitHutch.CreateBus("host=localhost"));
-            //var authRepo = new AuthenticationRepository(bus);
             container.Register<AuthenticationRepository>().AsSingleton();
             
             container.Register<IFileHandler, MongoDbFileHandler>(new MongoDbFileHandler("mongodb://localhost"));
             base.ApplicationStartup(container, pipelines);
         }
 
-        private IBus CreateBus(TinyIoCContainer tinyIoCContainer, NamedParameterOverloads namedParameterOverloads)
+        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
         {
-            return RabbitHutch.CreateBus("host=localhost");
+            var configuration = new StatelessAuthenticationConfiguration(nancyContext =>
+            {
+                var authRepo = container.Resolve<AuthenticationRepository>();
+                var authCookie = nancyContext.Request.Cookies.ContainsKey("picflow_webapp_apiKey") ? nancyContext.Request.Cookies["picflow_webapp_apiKey"] : string.Empty;
+                Guid sessionId;
+                if (!string.IsNullOrEmpty(authCookie) && Guid.TryParse(authCookie, out sessionId))
+                {
+                    var authUser = authRepo.GetAuthUserBySessionId(sessionId);
+                    if (authUser != null && !authUser.IsEmpty() && authUser.IsValid)
+                    {
+                        return new ClaimsPrincipal(new GenericIdentity(authUser.Id.ToString(), "stateless"));
+                    }
+                }
+                return null;
+            });
+
+
+            StatelessAuthentication.Enable(pipelines, configuration);
         }
     }
 }

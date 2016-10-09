@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Nancy;
+﻿using Nancy;
 
 namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {
@@ -10,7 +6,18 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
     {
         public HomeModule()
         {
-            Get("/", args => View["Home"]);
+            Get("/", args =>
+            {
+                var identity = this.Context.CurrentUser;
+                if (identity == null)
+                {
+                    return View["Login"];
+                }
+                else
+                {
+                    return View["Home"];
+                }
+            });
 
             Get("/contact", args => View["Contact"]);
 
