@@ -1,4 +1,8 @@
 ﻿﻿@Each
-ID: @Current.Id <br/>
-<br/>
+<div>
+<div>@Current.Timestamp</div>
+<div>@Current.UserName</div>
+<div>@Current.Message</div>
+<div><img src="~/images/@Current.Id" alt="postimage"/></div>
+</div>
 @EndEach

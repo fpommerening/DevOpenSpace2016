@@ -15,14 +15,15 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Data
             _mongoConnectionString = mongoConnectionString;
         }
 
-        public async Task SaveEntry(byte[] image, string message, string username)
+        public async Task SaveEntry(byte[] image, string filename, string message, string username)
         {
             var entry = new Entry
             {
                 Image = image,
                 Message = message,
                 Timestamp = DateTime.Now,
-                UserName = username
+                UserName = username,
+                Filename = filename
             };
 
             var db = GetMongoDatabase();

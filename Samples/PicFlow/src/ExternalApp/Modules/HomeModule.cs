@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FP.DevSpace2016.PicFlow.ExternalApp.Data;
 using FP.DevSpace2016.PicFlow.ExternalApp.Models;
 using Nancy;
@@ -29,15 +26,7 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Modules
                     model.NextEndIndex = 40;
                 }
 
-                foreach (var entry in await repo.GetEntries(model.CurrentStartIndex, model.CurrentEndIndex))
-                {
-                    var imageItem = new ImageItem
-                    {
-                        Id = entry.Id.ToString()
-                    };
-
-                    model.Entries.Add(imageItem);
-                }
+                await CreateEnties(repo, model);
 
                 return View["Home", model];
             });
@@ -71,19 +60,40 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Modules
                     model.NextStartIndex = end + 1;
                     model.NextEndIndex = end + 20;
                 }
-
-                foreach (var entry in await repo.GetEntries(model.CurrentStartIndex, model.CurrentEndIndex))
-                {
-                    var imageItem = new ImageItem
-                    {
-                        Id = entry.Id.ToString()
-                    };
-
-                    model.Entries.Add(imageItem);
-                }
-
+                await CreateEnties(repo, model);
+            
                 return View["Home", model];
             });
+
+            Get("/images/{entryId}", async args =>
+            {
+                string entryid = args.entryId;
+                var entry = await repo.GetEntryById(entryid);
+                if (entry?.Image == null)
+                {
+                    return HttpStatusCode.NotFound;
+                }
+
+                return new ByteArrayResponse(entry.Image, MimeTypes.GetMimeType(entry.Filename));
+            } );
+
+            Get("/contact", o => View["Contact"]);
+        }
+
+        private static async Task CreateEnties(EntryRepository repo, ImageItems model)
+        {
+            foreach (var entry in await repo.GetEntries(model.CurrentStartIndex, model.CurrentEndIndex))
+            {
+                var imageItem = new ImageItem
+                {
+                    Id = entry.Id.ToString(),
+                    Message = entry.Message,
+                    Timestamp = entry.Timestamp,
+                    UserName = entry.UserName
+                };
+
+                model.Entries.Add(imageItem);
+            }
         }
     }
 }

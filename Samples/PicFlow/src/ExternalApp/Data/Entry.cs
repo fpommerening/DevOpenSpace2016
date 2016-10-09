@@ -12,6 +12,9 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Data
         [BsonElement("image")]
         public byte[] Image { get; set; }
 
+        [BsonElement("filename")]
+        public string Filename { get; set; }
+
         [BsonElement("username")]
         public string UserName { get; set; }
 
