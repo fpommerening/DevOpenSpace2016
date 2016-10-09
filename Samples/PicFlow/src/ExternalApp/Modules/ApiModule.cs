@@ -28,7 +28,7 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Modules
                         }
                         imageBytes = memoryStream.ToArray();
 
-                        await repo.SaveEntry(imageBytes, apiUpload.Message, apiUpload.User);
+                        await repo.SaveEntry(imageBytes, apiUpload.Image.Name,apiUpload.Message, apiUpload.User);
                     }
                 }
 
