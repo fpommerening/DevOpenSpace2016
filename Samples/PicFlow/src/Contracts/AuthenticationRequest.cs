@@ -2,7 +2,7 @@
 
 namespace FP.DevSpace2016.PicFlow.Contracts
 {
-    public class AuthorizationRequest
+    public class AuthenticationRequest
     {
         public Guid Id { get; set; }
 

@@ -39,8 +39,8 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizationRequest.cs" />
-    <Compile Include="AuthorizationResponse.cs" />
+    <Compile Include="AuthenticationRequest.cs" />
+    <Compile Include="AuthenticationResponse.cs" />
     <Compile Include="DtoImage.cs" />
     <Compile Include="Dto\DtoMessage.cs" />
     <Compile Include="FileHandler\FileUploadResult.cs" />

@@ -1,0 +1,14 @@
+﻿@Master['MasterPage']
+
+@Section['Content']
+
+ <div id="first-block">
+                <div class="line">
+                    <div class="margin-bottom">
+						Herzlich Willkommen
+						<a href="/login">Login</a>
+                          </div> 
+                </div>
+            </div>
+
+@EndSection
