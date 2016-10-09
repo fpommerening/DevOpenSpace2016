@@ -1,7 +1,10 @@
 ﻿@Master['MasterPage']
 
 @Section['Content']
-
+<div id="first-block">
+                <div class="line">
+                    <div class="margin-bottom">
+                        <div class="margin">
 <form action="imagerequest" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="file" id="fileToUpload">
@@ -9,4 +12,8 @@
 </form>
 
 
+                        </div>
+                    </div>
+                </div>
+            </div>
 @EndSection
