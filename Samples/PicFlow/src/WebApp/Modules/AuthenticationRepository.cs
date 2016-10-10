@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using EasyNetQ;
-using FP.DevSpace2016.PicFlow.Contracts;
+using FP.DevSpace2016.PicFlow.Contracts.Messages;
 
 namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {

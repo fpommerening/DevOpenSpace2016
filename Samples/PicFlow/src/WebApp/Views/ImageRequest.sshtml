@@ -12,9 +12,9 @@
 							<div class="s-12 l-2"><label>Bild (*.png / *.jpg)</label></div>
 							<div class="s-12 l-4"><input name="file" title="Bild ..." type="file" /></div>
 							<div class="s-12 l-6">
-								<select form="select" name="event">
-									<option value="ds">Developer Open Space</option>
-									<option value="sp">Spartakiade</option>
+								<select form="select" name="">
+									<option name="eventoverlay[1]" value="ds">Developer Open Space</option>
+									<option name="eventoverlay[2]" value="sp">Spartakiade</option>
 								</select>
 							</div>
 						</div>
@@ -32,7 +32,7 @@
 									</select>
 							</div>	
 							<div class="s-12 l-6 right">
-								<input name="postimage" value="" type="checkbox" /><label>Bild posten</label>
+								<input name="postimage" value="true" type="checkbox" /><label>Bild posten</label>
 							</div>
 						</div>
 					</div>

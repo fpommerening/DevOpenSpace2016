@@ -1,4 +1,5 @@
 ﻿using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
+using FP.DevSpace2016.PicFlow.Contracts.Messages;
 using FP.DevSpace2016.PicFlow.WebApp.Models;
 using Nancy;
 using Nancy.ModelBinding;
@@ -33,11 +34,11 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                 var request = this.Bind<ImageRequest>();
 
                 var uploadResult = await _fileUploadHandler.HandleUpload(request.File.Name, request.File.Value);
-                var job = new Contracts.ImageProcessingJob
+                var job = new ImageProcessingJob
                 {
                     SourceId = uploadResult.Identifier
                 };
-                var job2 = new Contracts.ImageUploadJob
+                var job2 = new ImageUploadJob
                 {
                     ImageId = uploadResult.Identifier
                 };
