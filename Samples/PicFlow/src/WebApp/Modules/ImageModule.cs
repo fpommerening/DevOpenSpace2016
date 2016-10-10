@@ -33,6 +33,8 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
             {
                 var request = this.Bind<ImageRequest>();
 
+                
+
                 var uploadResult = await _fileUploadHandler.HandleUpload(request.File.Name, request.File.Value);
                 var job = new ImageProcessingJob
                 {
