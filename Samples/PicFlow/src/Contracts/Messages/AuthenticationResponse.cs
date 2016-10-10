@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FP.DevSpace2016.PicFlow.Contracts
+namespace FP.DevSpace2016.PicFlow.Contracts.Messages
 {
     public class AuthenticationResponse
     {

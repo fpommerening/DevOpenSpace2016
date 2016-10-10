@@ -39,17 +39,18 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationRequest.cs" />
-    <Compile Include="AuthenticationResponse.cs" />
-    <Compile Include="DtoImage.cs" />
+    <Compile Include="Messages\AuthenticationRequest.cs" />
+    <Compile Include="Messages\AuthenticationResponse.cs" />
+    <Compile Include="Dbo\User.cs" />
+    <Compile Include="Dto\DtoImage.cs" />
     <Compile Include="Dto\DtoMessage.cs" />
     <Compile Include="FileHandler\FileUploadResult.cs" />
     <Compile Include="FileHandler\IFileHandler.cs" />
     <Compile Include="FileHandler\LocalStorageFileHandler.cs" />
     <Compile Include="FileHandler\MongoDbFileHandler.cs" />
-    <Compile Include="ImageProcessingJob.cs" />
-    <Compile Include="ImageSaveJob.cs" />
-    <Compile Include="ImageUploadJob.cs" />
+    <Compile Include="Messages\ImageProcessingJob.cs" />
+    <Compile Include="Messages\ImageSaveJob.cs" />
+    <Compile Include="Messages\ImageUploadJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
