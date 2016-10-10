@@ -11,7 +11,7 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
             try
             {
                 myBus = RabbitHutch.CreateBus("host=localhost");
-                myBus.SubscribeAsync<Contracts.ImageSaveJob>("tetet", job =>
+                myBus.SubscribeAsync<Contracts.Messages.ImageSaveJob>("tetet", job =>
                 {
                     var fileWriter = new FileWriter("mongodb://localhost");
                     return fileWriter.PersistImage(job.Id);

@@ -5,6 +5,7 @@ using FP.DevSpace2016.PicFlow.WebApp.Models;
 using Nancy;
 using Nancy.ModelBinding;
 
+
 namespace FP.DevSpace2016.PicFlow.WebApp.Binder
 {
     public class FileUploadRequestBinder : IModelBinder
@@ -15,9 +16,15 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Binder
             var imageRequest = (instance as ImageRequest) ?? new ImageRequest();
 
             var form = context.Request.Form;
-            
+                        
             imageRequest.File = GetFileByKey(context, "file");
-            imageRequest.ContentSize = GetContentSize(context);
+            imageRequest.Message = form.message;
+            imageRequest.PostImage = form.postimage == "true";
+            imageRequest.eventoverlay = form.eventoverlay.Value;
+            foreach (var item in form.resolutions.Value.ToString().Split(','))
+            {
+                imageRequest.Resolutions.Add(Convert.ToInt32(item));
+            }
 
             return imageRequest;
         }
@@ -31,11 +38,6 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Binder
         {
             IEnumerable<HttpFile> files = context.Request.Files;
             return files?.FirstOrDefault(x => x.Key == key);
-        }
-
-        private long GetContentSize(NancyContext context)
-        {
-            return context.Request.Headers.ContentLength;
         }
     }
 }

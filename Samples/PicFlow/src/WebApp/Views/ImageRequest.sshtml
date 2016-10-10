@@ -12,9 +12,9 @@
 							<div class="s-12 l-2"><label>Bild (*.png / *.jpg)</label></div>
 							<div class="s-12 l-4"><input name="file" title="Bild ..." type="file" /></div>
 							<div class="s-12 l-6">
-								<select form="select" name="">
-									<option name="eventoverlay[1]" value="ds">Developer Open Space</option>
-									<option name="eventoverlay[2]" value="sp">Spartakiade</option>
+								<select name="eventoverlay">
+									<option value="ds">Developer Open Space</option>
+									<option value="sp">Spartakiade</option>
 								</select>
 							</div>
 						</div>
@@ -24,7 +24,7 @@
 						<div class="margin">
 							<div class="s-12 l-6">
 								<p><label>Auflösung:</label></p>
-									<select form="select" multiple="multiple" name="resolution">
+									<select multiple="multiple" name="resolutions">
 										<option value="2">2 MPixel</option>
 										<option value="3">3 MPixel</option>
 										<option value="6">6 MPixel</option>

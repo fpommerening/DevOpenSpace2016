@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using FP.DevSpace2016.PicFlow.Contracts;
+using FP.DevSpace2016.PicFlow.Contracts.Dto;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 
 namespace FP.DevSpace2016.PicFlow.ImagePersistor

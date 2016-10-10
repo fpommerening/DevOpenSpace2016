@@ -3,7 +3,9 @@ using System.IO;
 using System.Threading.Tasks;
 using EasyNetQ;
 using FP.DevSpace2016.PicFlow.Contracts;
+using FP.DevSpace2016.PicFlow.Contracts.Dto;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
+using FP.DevSpace2016.PicFlow.Contracts.Messages;
 using ImageProcessorCore;
 
 namespace FP.DevSpace2016.PicFlow.ImageProcessor

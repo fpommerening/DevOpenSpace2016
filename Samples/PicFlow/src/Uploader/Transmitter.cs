@@ -1,11 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using EasyNetQ;
-using FP.DevSpace2016.PicFlow.Contracts;
+using FP.DevSpace2016.PicFlow.Contracts.Dto;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
+using FP.DevSpace2016.PicFlow.Contracts.Messages;
 
 namespace FP.DevSpace2016.PicFlow.Uploader
 {
