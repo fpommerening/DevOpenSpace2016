@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using EasyNetQ;
+using FP.DevSpace2016.PicFlow.Contracts.Messages;
 
 namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {
@@ -12,12 +13,12 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
             _bus = bus;
         }
 
-        public Task SendImageProcessingJob(Contracts.ImageProcessingJob job)
+        public Task SendImageProcessingJob(ImageProcessingJob job)
         {
             return _bus.PublishAsync(job);
         }
 
-        public Task SendUploadJob(Contracts.ImageUploadJob job)
+        public Task SendUploadJob(ImageUploadJob job)
         {
             return _bus.PublishAsync(job);
         }

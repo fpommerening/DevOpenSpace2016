@@ -7,25 +7,28 @@ namespace FP.DevSpace2016.PicFlow.Authorization
     {
         public static void Main(string[] args)
         {
+
             IBus myBus = null;
             try
             {
                 myBus = RabbitHutch.CreateBus("host=localhost");
-                myBus.Subscribe<Contracts.AuthenticationRequest>("Auth", request =>
+                var userRepo = new UserRepository("host = localhost; database = devspace; password = leipzig; username = devspace");
+                myBus.SubscribeAsync<Contracts.Messages.AuthenticationRequest>("Auth", async request =>
                 {
-                    var response = new Contracts.AuthenticationResponse
+                    var response = new Contracts.Messages.AuthenticationResponse
                     {
                         Id = request.Id,
                     };
 
-                    if (request.UserName == "frank")
+                    var userInfo = await userRepo.CheckUser(request.UserName, request.PasswordHash);
+                    if (userInfo.IsValid)
                     {
-                        response.UserId = Guid.Parse("34D012C4-2572-4481-84D6-3AF1FDA3A756");
-                        response.User = "Frank Pommerening";
+                        response.UserId = userInfo.Id;
+                        response.User = userInfo.User;
                         response.IsValid = true;
                     }
-                  
-                    myBus.Publish(response);
+
+                    await myBus.PublishAsync(response);
                 });
 
                 Console.WriteLine("Authorization gestartet...");
@@ -43,5 +46,7 @@ namespace FP.DevSpace2016.PicFlow.Authorization
 
             Console.WriteLine("Authorization beendet...");
         }
+
+      
     }
 }
