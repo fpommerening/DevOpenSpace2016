@@ -45,7 +45,7 @@ namespace FP.DevSpace2016.Logging.Caller
             for (int i = 1; i <= number; i++)
             {
                 var client = new HttpClient();
-                var request = string.Format("http://localhost:5000/Service/{0}", Guid.NewGuid());
+                var request = string.Format("http://loadbalancer/Service/{0}", Guid.NewGuid());
 
                 var t = client.GetStringAsync(request).ContinueWith(r =>
                 {
