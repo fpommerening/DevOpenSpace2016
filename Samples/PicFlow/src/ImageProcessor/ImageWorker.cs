@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using EasyNetQ;
-using FP.DevSpace2016.PicFlow.Contracts;
 using FP.DevSpace2016.PicFlow.Contracts.Dto;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 using FP.DevSpace2016.PicFlow.Contracts.Messages;
@@ -22,20 +21,22 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
 
         public void Init()
         {
-            _subscription = _bus.SubscribeAsync<ImageProcessingJob>("Sub1", job => WorkImage(job));
+            _subscription = _bus.SubscribeAsync<ImageProcessingJob>("ImageProcessor", job => WorkImage(job));
         }
 
         private async Task WorkImage(ImageProcessingJob job)
         {
             var fileHandler = new MongoDbFileHandler("mongodb://localhost");
-            var sourcefile = await fileHandler.GetMessageObject<DtoImage>(job.SourceId);
+            var sourcefile = await fileHandler.GetMessageObject<DtoImage>(job.Id);
 
             var outputfile = AddOverlay(sourcefile);
             var id = await fileHandler.SaveMessageObject(outputfile);
 
-            var nextJob = new ImageSaveJob {Id = id};
-            Console.WriteLine(sourcefile.FileName);
-            await _bus.PublishAsync(nextJob);
+            foreach (var successor in job.Successors)
+            {
+                successor.Id = id;
+                await _bus.PublishAsync(successor);
+            }
         }
 
         private DtoImage AddOverlay(DtoImage sourcefile)

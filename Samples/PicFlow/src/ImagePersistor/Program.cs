@@ -5,16 +5,20 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
 {
     public class Program
     {
+        public const string DbCnn = "host=localhost;database=devspace;password=leipzig;username=devspace";
+        public const string MongoCnn = "mongodb://localhost";
+        public const string RabbitCnn = "host=localhost";
+
         public static void Main(string[] args)
         {
             IBus myBus = null;
             try
             {
-                myBus = RabbitHutch.CreateBus("host=localhost");
-                myBus.SubscribeAsync<Contracts.Messages.ImageSaveJob>("tetet", job =>
+                myBus = RabbitHutch.CreateBus(RabbitCnn);
+                myBus.SubscribeAsync<Contracts.Messages.ImageSaveJob>("ImagePersistor", job =>
                 {
-                    var fileWriter = new FileWriter("mongodb://localhost");
-                    return fileWriter.PersistImage(job.Id);
+                    var fileWriter = new DbWriter(MongoCnn, DbCnn);
+                    return fileWriter.PersistImage(job.Id, job.UserId, job.SourceId, job.Message);
                 });
                     
                 Console.WriteLine("ImagePersistor gestartet...");

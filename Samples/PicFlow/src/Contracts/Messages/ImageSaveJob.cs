@@ -1,7 +1,13 @@
-﻿namespace FP.DevSpace2016.PicFlow.Contracts.Messages
+﻿using System;
+
+namespace FP.DevSpace2016.PicFlow.Contracts.Messages
 {
-    public class ImageSaveJob
+    public class ImageSaveJob : ImageJob
     {
-        public string Id { get; set; }
+        public string SourceId { get; set; }
+
+        public Guid UserId { get; set; }
+
+        public string Message { get; set; }
     }
 }
