@@ -14,6 +14,11 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp.Modules
             {
                 var apiUpload = this.Bind<ApiUpload>();
 
+                if (apiUpload.ApiKey.ToLower() != "devspace2016")
+                {
+                    return HttpStatusCode.Unauthorized;
+                }
+
                 if (apiUpload.Image != null)
                 {
 

@@ -29,14 +29,14 @@ namespace FP.DevSpace2016.PicFlow.Uploader
         {
 
             var handler = new MongoDbFileHandler(_mongoConnectionString);
-            var image = await handler.GetMessageObject<DtoImage>(job.ImageId);
+            var image = await handler.GetMessageObject<DtoImage>(job.Id);
 
             using (var client = new HttpClient())
             using (var content = new MultipartFormDataContent())
             {
-                content.Add(new StringContent("Jetzt geht es los"), "User");
-                content.Add(new StringContent("Jetzt geht es los2"), "Message");
-                content.Add(new StringContent("ajskdjkasjdkja"), "APIKEY");
+                content.Add(new StringContent(job.User), "User");
+                content.Add(new StringContent(job.Message), "Message");
+                content.Add(new StringContent("devspace2016"), "APIKEY");
                 content.Add(new ByteArrayContent(image.Data), "Image", image.FileName);
                 await client.PostAsync("http://localhost:8000/api/postimage", content);
             }

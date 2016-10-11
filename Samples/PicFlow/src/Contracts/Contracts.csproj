@@ -39,6 +39,8 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dbo\Image.cs" />
+    <Compile Include="Dbo\ProcessingJob.cs" />
     <Compile Include="Messages\AuthenticationRequest.cs" />
     <Compile Include="Messages\AuthenticationResponse.cs" />
     <Compile Include="Dbo\User.cs" />
@@ -48,6 +50,7 @@
     <Compile Include="FileHandler\IFileHandler.cs" />
     <Compile Include="FileHandler\LocalStorageFileHandler.cs" />
     <Compile Include="FileHandler\MongoDbFileHandler.cs" />
+    <Compile Include="Messages\ImageJob.cs" />
     <Compile Include="Messages\ImageProcessingJob.cs" />
     <Compile Include="Messages\ImageSaveJob.cs" />
     <Compile Include="Messages\ImageUploadJob.cs" />

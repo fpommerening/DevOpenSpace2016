@@ -20,7 +20,7 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Binder
             imageRequest.File = GetFileByKey(context, "file");
             imageRequest.Message = form.message;
             imageRequest.PostImage = form.postimage == "true";
-            imageRequest.eventoverlay = form.eventoverlay.Value;
+            imageRequest.EventOverlay = form.eventoverlay.Value;
             foreach (var item in form.resolutions.Value.ToString().Split(','))
             {
                 imageRequest.Resolutions.Add(Convert.ToInt32(item));

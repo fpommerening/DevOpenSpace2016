@@ -12,7 +12,7 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Models
 
         public HttpFile File { get; set; }
 
-        public string eventoverlay { get; set; }
+        public string EventOverlay { get; set; }
 
         public List<int> Resolutions { get; set; }
 
