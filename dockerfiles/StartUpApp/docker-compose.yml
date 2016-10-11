@@ -7,7 +7,7 @@ services:
     image: mongo:3.2
 
   compose:
-    image: dduportal/docker-compose
+    image: fpommerening/devopenspace2016:logging-compose
     
   weblogger:
     image: fpommerening/devopenspace2016:logging-web
