@@ -1,7 +1,7 @@
 FROM microsoft/dotnet:core
 MAINTAINER Frank Pommerening "frank@pommerening-online.de"
-ENV REFRESHED_AT 2016-09-18
-ENV Web_VERSION 0.0.3
+ENV REFRESHED_AT 2016-10-11
+ENV Web_VERSION 0.0.5
 
 
 RUN set -x \
