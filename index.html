@@ -596,13 +596,23 @@ rabbitmqctl -n rabbit@rmqNode3 start_app
  fpommerening/devopenspace2016:logging-compose
                             </code>
                        </pre>
-                            <pre>
+                       <pre>
+                            <code data-trim contenteditable>
+                                $ docker-compose run loggingcaller
+                            </code>
+                       </pre>
+                        <pre>
                             <code data-trim contenteditable>
                                 $ docker run -it --rm --name logconsole 
---link weblogger_MyRabbitMQ_1:MyRabbitMQ 
+--net compose_default
 fpommerening/devopenspace2016:logging-console
                             </code>
                         </pre>
+                         <pre>
+                            <code data-trim contenteditable>
+                                $ docker-compose down
+                            </code>
+                       </pre>
                 </section>
              </section>
 
