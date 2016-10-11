@@ -566,12 +566,78 @@ rabbitmqctl -n rabbit@rmqNode3 start_app
                 </section>
 
             </section>
+
             <section>
                  <section>
+                     <h2>Weblogger</h2>
+                     <img src="images/weblogger.svg" style="border:0px;width:700px" alt="Übersicht für Beispiel Weblogger">
+                 </section>
+                
+                <section>
+                    <h3>Docker-Compose</h3>
+                       <pre>
+                            <code data-trim contenteditable>
+                                $ docker run -it --rm --name logging-compose 
+ -v /var/run/docker.sock:/var/run/docker.sock 
+ fpommerening/devopenspace2016:logging-compose
+                            </code>
+                       </pre>
+                            <pre>
+                            <code data-trim contenteditable>
+                                $ docker run -it --rm --name logconsole 
+--link weblogger_MyRabbitMQ_1:MyRabbitMQ 
+fpommerening/devopenspace2016:logging-console
+                            </code>
+                        </pre>
+                </section>
+             </section>
+
+            <section>
+                 <section>
+                     <h2>Image-Workflow</h2>
                      <img src="images/ImageProcessing.svg" alt="Übersicht Nachrichtentransport">
                  </section>
                  <section>
-            
+                     <h3>Gruppe WebApp </h3>
+                     <ul>
+                        <li>Anfragen zur Authentifzierung versenden</li>
+                        <li>Authentifzierungsantworten empfangen und in AuthenticationRepository verarbeiten</li>
+                        <li>Verarbeitungsjob mit Folgeschritten erstellen und versenden</li>
+                     </ul>
+                 </section>
+                 <section>
+                     <h3>Gruppe Authorization / Uploader  </h3>
+                     <ul>
+                         <li>Anfragen zur Authentifzierung empfangen und Benutzerdaten gegen UserRepository prüfen</li>
+                         <li>Authentifzierungsantworten mit Prüfergebnis versenden</li>
+                         <li>Versandjobs an externe Anwendung empfangen und per HTTP übertragen</li>
+                     </ul>
+                </section>
+                <section>
+                    <h3>Gruppe Image Prozessor / Image Persitor</h3>
+                    <ul>
+                        <li>Verarbeitungsjob empfangen und an Grafikverarbeitung übergeben</li>
+                        <li>Folgejobs an Persitor / Uploader versenden</li>
+                        <li>Grafiken für den Benutzer speichern</li>
+                    </ul>
+                  </section>
+                   <section>
+                    <h3>Docker-Compose</h3>
+                        Mit docker-Console im Ordner <i>dockerfiles/picflow</i> wechsel
+                        Starten: 
+                       <pre>
+                            <code data-trim contenteditable>
+                                $ docker-compose up -d
+                            </code>
+                       </pre>
+                       Beenden:
+                            <pre>
+                            <code data-trim contenteditable>
+                                $ docker-compose down
+                            </code>
+                        </pre>
+                </section>
+            </section>            
              
             
              <section>
