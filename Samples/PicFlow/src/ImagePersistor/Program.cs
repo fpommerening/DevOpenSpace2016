@@ -18,7 +18,7 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
                 myBus.SubscribeAsync<Contracts.Messages.ImageSaveJob>("ImagePersistor", job =>
                 {
                     var dbWriter = new DbWriter(MongoCnn, DbCnn);
-                    return dbWriter.PersistImage(job.Id, job.UserId, job.SourceId, job.Message);
+                    return dbWriter.PersistImage(job.Id, job.UserId, job.SourceId, job.Message, job.Resolution);
                 });
                     
                 Console.WriteLine("ImagePersistor gestartet...");

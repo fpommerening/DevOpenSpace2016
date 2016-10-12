@@ -5,6 +5,8 @@ namespace FP.DevSpace2016.PicFlow.Contracts.Dbo
 {
     public class ProcessingJob
     {
+        public DateTime Timestamp { get; set; }
+
         public Guid Id { get; set; }
 
         public string SourceId { get; set; }
@@ -14,5 +16,7 @@ namespace FP.DevSpace2016.PicFlow.Contracts.Dbo
         public string Message { get; set; }
 
         public List<Image> Images { get; set; }
+
+        public string Filename { get; set; }
     }
 }

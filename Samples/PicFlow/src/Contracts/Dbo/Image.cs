@@ -12,6 +12,6 @@ namespace FP.DevSpace2016.PicFlow.Contracts.Dbo
 
         public Byte[] Data { get; set; }
 
-        public string Filename { get; set; }
+        public int Resolution { get; set; }
     }
 }

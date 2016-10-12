@@ -1,0 +1,22 @@
+﻿<tr>
+<td>@Model.Timestamp</td>
+<td>@Model.Filename</td>
+<td>@Model.Message</td>
+<td>
+@If.CalcRes2
+	<a href="#">2Mpixel</a>
+@EndIf
+
+@If.CalcRes3
+	<a href="#">3Mpixel</a>
+@EndIf
+
+@If.CalcRes6
+	<a href="#">6Mpixel</a>
+@EndIf
+
+@If.CalcRes12
+	<a href="#">12Mpixel</a>
+@EndIf
+</td>
+</tr>

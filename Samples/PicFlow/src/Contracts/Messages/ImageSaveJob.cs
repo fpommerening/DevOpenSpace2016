@@ -9,5 +9,7 @@ namespace FP.DevSpace2016.PicFlow.Contracts.Messages
         public Guid UserId { get; set; }
 
         public string Message { get; set; }
+
+        public int Resolution { get; set; }
     }
 }
