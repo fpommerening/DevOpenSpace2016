@@ -1,5 +1,4 @@
 ﻿using System;
-using EasyNetQ;
 
 namespace FP.DevSpace2016.PicFlow.ImageProcessor
 {
@@ -7,12 +6,11 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
     {
         public static void Main(string[] args)
         {
-            IBus myBus = null;
+            
 
             try
             {
-                myBus = RabbitHutch.CreateBus("host=localhost");
-                using (var worker = new ImageWorker(myBus))
+                using (var worker = new ImageWorker())
                 {
                     worker.Init();
                     Console.WriteLine("ImageProcessor gestartet...");
@@ -26,7 +24,7 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
             }
             finally
             {
-                myBus?.Dispose();
+                
             }
 
             Console.WriteLine("ImageProcessor beendet...");

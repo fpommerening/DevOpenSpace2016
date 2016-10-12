@@ -10,19 +10,18 @@ namespace FP.DevSpace2016.PicFlow.Uploader
 {
     public class Transmitter : IDisposable
     {
-        private readonly IBus _myBus;
+        
         private readonly string _mongoConnectionString;
-        private IDisposable _subscription;
 
-        public Transmitter(IBus myBus, string mongoConnectionstring)
+        public Transmitter(string mongoConnectionstring)
         {
-            _myBus = myBus;
+            
             _mongoConnectionString = mongoConnectionstring;
         }
 
         public void Init()
         {
-            _subscription = _myBus.SubscribeAsync<ImageUploadJob>("UploadSubscription", job => UploadImage(job));
+           
         }
 
         private async Task UploadImage(ImageUploadJob job)
@@ -45,8 +44,6 @@ namespace FP.DevSpace2016.PicFlow.Uploader
 
         public void Dispose()
         {
-            _subscription?.Dispose();
-            _subscription = null;
         }
     }
 }

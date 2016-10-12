@@ -26,7 +26,7 @@ namespace FP.DevSpace2016.PicFlow.WebApp
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            container.Register<IBus>(RabbitHutch.CreateBus("host=localhost"));
+            // Bus als Instanz im Container registieren
             container.Register<AuthenticationRepository>().AsSingleton();
             
             container.Register<IFileHandler, MongoDbFileHandler>(new MongoDbFileHandler("mongodb://localhost"));

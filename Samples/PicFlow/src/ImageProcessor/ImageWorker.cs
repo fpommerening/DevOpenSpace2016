@@ -11,17 +11,17 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
 {
     public class ImageWorker : IDisposable
     {
-        private readonly IBus _bus;
-        private IDisposable _subscription;
+        
 
-        public ImageWorker(IBus bus)
+
+        public ImageWorker()
         {
-            _bus = bus;
+
         }
 
         public void Init()
         {
-            _subscription = _bus.SubscribeAsync<ImageProcessingJob>("ImageProcessor", job => WorkImage(job));
+
         }
 
         private async Task WorkImage(ImageProcessingJob job)
@@ -35,7 +35,7 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
             foreach (var successor in job.Successors)
             {
                 successor.Id = id;
-                await _bus.PublishAsync(successor);
+                // Nachfolgeprozess starten
             }
         }
 
@@ -58,8 +58,7 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
 
         public void Dispose()
         {
-            _subscription?.Dispose();
-            _subscription = null;
+         
         }
     }
 }

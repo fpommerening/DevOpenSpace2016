@@ -1,5 +1,4 @@
 ﻿using System;
-using EasyNetQ;
 
 namespace FP.DevSpace2016.PicFlow.Uploader
 {
@@ -7,12 +6,11 @@ namespace FP.DevSpace2016.PicFlow.Uploader
     {
         public static void Main(string[] args)
         {
-            IBus myBus = null;
-
+           
             try
             {
-                myBus = RabbitHutch.CreateBus("host=localhost");
-                using (var transmittter = new Transmitter(myBus, "mongodb://localhost"))
+           
+                using (var transmittter = new Transmitter("mongodb://localhost"))
                 {
                     transmittter.Init();
                     Console.WriteLine("Uploader gestartet...");
@@ -26,7 +24,6 @@ namespace FP.DevSpace2016.PicFlow.Uploader
             }
             finally
             {
-                myBus?.Dispose();
             }
 
             Console.WriteLine("Uploader beendet...");
