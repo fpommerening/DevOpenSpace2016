@@ -17,8 +17,8 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
                 myBus = RabbitHutch.CreateBus(RabbitCnn);
                 myBus.SubscribeAsync<Contracts.Messages.ImageSaveJob>("ImagePersistor", job =>
                 {
-                    var fileWriter = new DbWriter(MongoCnn, DbCnn);
-                    return fileWriter.PersistImage(job.Id, job.UserId, job.SourceId, job.Message);
+                    var dbWriter = new DbWriter(MongoCnn, DbCnn);
+                    return dbWriter.PersistImage(job.Id, job.UserId, job.SourceId, job.Message);
                 });
                     
                 Console.WriteLine("ImagePersistor gestartet...");
