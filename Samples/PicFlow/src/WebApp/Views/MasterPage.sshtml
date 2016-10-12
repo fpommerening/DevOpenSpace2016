@@ -30,6 +30,7 @@
                         <ul class="right">
                             <li><a href="/">Home</a></li>
                             <li><a href="/contact">Contact</a></li>
+							<li id="newimage"><a href="/imagerequest" >Neues Bild</a></li>
 							<li id="logout"><a href="#" onClick="logoutSession()">Logout</a></li>
                         </ul>
                     </div>
@@ -90,11 +91,13 @@
 	$(document).ready(function () {
 	  var apiToken = ApiToken.Get();
 				$("#logout").hide();
+				$("#newimage").hide();
                 if (apiToken.IsValid) 
 				{
 					var securerequest = {};
 					var securesuccess = function (response) {
 							$("#logout").show();
+							$("#newimage").show();
                         };
 
 					$.ajax({

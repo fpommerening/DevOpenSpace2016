@@ -1,12 +1,18 @@
-﻿using Nancy;
+﻿using System;
+using FP.DevSpace2016.PicFlow.WebApp.Models;
+using Nancy;
 
 namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {
     public class HomeModule : NancyModule
     {
+        public const string DbCnn = "host=localhost;database=devspace;password=leipzig;username=devspace";
+
         public HomeModule()
         {
-            Get("/", args =>
+            ImageRepository imgRepo = new ImageRepository(DbCnn);
+
+            Get("/", async args =>
             {
                 var identity = this.Context.CurrentUser;
                 if (identity == null)
@@ -15,7 +21,10 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                 }
                 else
                 {
-                    return View["Home"];
+                    var model = new Home {Message = "Herzlich Willkommen"};
+
+                    model.Jobs = await imgRepo.GetProcessingJobs(Guid.Parse(identity.Identity.Name));
+                    return View["Home", model];
                 }
             });
 

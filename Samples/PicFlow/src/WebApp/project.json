@@ -17,7 +17,8 @@
     "MongoDB.Driver": "2.3.0",
     "MongoDB.Bson": "2.3.0",
     "Nancy.Authentication.Stateless": "2.0.0-barneyrubble",
-    "System.Security.Cryptography.Algorithms": "4.2.0"
+    "System.Security.Cryptography.Algorithms": "4.2.0",
+    "Marten": "1.1.0"
   },
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel"

@@ -19,7 +19,7 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
             _dbConnectionString = dbConnectionString;
         }
 
-        public async Task PersistImage(string imageId, Guid userId, string sourceId, string message)
+        public async Task PersistImage(string imageId, Guid userId, string sourceId, string message, int resolution)
         {
             var handler = new MongoDbFileHandler(_mongoConnectionString);
             var image = await handler.GetMessageObject<DtoImage>(imageId);
@@ -35,13 +35,20 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
                 {
                     processingJob = new ProcessingJob
                     {
+                        Timestamp = DateTime.Now,
                         Message = message,
                         UserId = user.Id,
                         SourceId = sourceId,
-                        Images = new List<Image>()
+                        Images = new List<Image>(),
+                        Filename = image.FileName
                     };
                 }
-                var dbImage = new Image {Data = image.Data, Filename = image.FileName};
+                var dbImage = new Image
+                {
+                    Data = image.Data,
+                    Id = Guid.NewGuid(),
+                    Resolution = resolution
+                };
                 processingJob.Images.Add(dbImage);
                 session.Store(processingJob);
                 session.SaveChanges();
