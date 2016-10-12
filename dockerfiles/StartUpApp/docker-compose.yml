@@ -20,6 +20,9 @@ services:
     
   caller:
     image: fpommerening/devopenspace2016:logging-caller
+   
+  core:
+    image: fpommerening/devopenspace2016:core-base
 
   image-db:
     image: fpommerening/devopenspace2016:image-database
