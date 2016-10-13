@@ -13,7 +13,7 @@
 							<div class="s-12 l-4"><input name="file" title="Bild ..." type="file" /></div>
 							<div class="s-12 l-6">
 								<select name="eventoverlay">
-									<option value="ds">Developer Open Space</option>
+									<option value="dos">Developer Open Space</option>
 									<option value="sp">Spartakiade</option>
 								</select>
 							</div>

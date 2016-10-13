@@ -67,13 +67,14 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                     {
                         UserId = Guid.Parse(identity.Identity.Name),
                         Message = request.Message,
-                        SourceId = uploadResult.Identifier
+                        SourceId = uploadResult.Identifier,
+                        Resolution = resolution
                     };
                     procJob.Successors.Add(saveJob);
                     await _messageRepository.SendImageProcessingJob(procJob);
                 }
-
-                return HttpStatusCode.OK;
+                var model = new Home { Message = $"Auftrag mit Bild {request.File?.Name} wurde gestartet"};
+                return View["Home", model];
 
             });
 

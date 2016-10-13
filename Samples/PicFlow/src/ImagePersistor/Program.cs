@@ -13,6 +13,7 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
             
             try
             {
+                
                 Console.WriteLine("ImagePersistor gestartet...");
                 Console.ReadLine();
             }
