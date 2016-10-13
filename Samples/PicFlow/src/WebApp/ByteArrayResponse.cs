@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Nancy;
 
-namespace FP.DevSpace2016.PicFlow.ExternalApp
+namespace FP.DevSpace2016.PicFlow.WebApp
 {
     public class ByteArrayResponse : Response
     {

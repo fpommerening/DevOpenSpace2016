@@ -71,5 +71,15 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 
             }
         }
+
+        public async Task<ProcessingJob> GetImageJobById(Guid jobId, Guid userId)
+        {
+            var store = DocumentStore.For(_dbConnectionString);
+            using (var session = store.LightweightSession())
+            {
+                var user = await session.Query<User>().Where(x => x.Id == userId).FirstAsync();
+                return await session.Query<ProcessingJob>().Where(x => x.UserId == user.Id && x.Id == jobId).FirstOrDefaultAsync();
+            }
+        }
     }
 }
