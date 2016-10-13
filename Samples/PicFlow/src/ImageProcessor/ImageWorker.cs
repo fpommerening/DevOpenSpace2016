@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using FP.DevSpace2016.PicFlow.Contracts.Dto;
@@ -68,19 +69,33 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
 
         private FileStream GetOverlay(string overlayId, int resolution)
         {
+            var prefix = string.Empty;
+
+            switch (overlayId.ToLowerInvariant())
+            {
+                case "dos":
+                    prefix = "Overlays/DevSpace";
+                    break;
+                case "sp":
+                    prefix = "Overlays/Sparta";
+                    break;
+                default:
+                    throw new NotSupportedException($"the overlay id {overlayId} is not supported");
+            }
+
             if (resolution > 10)
             {
-                return File.OpenRead("Overlays/DevSpace_10_10.png");
+                return File.OpenRead($"{prefix}_10_10.png");
             }
             if (resolution >= 6)
             {
-                return File.OpenRead("Overlays/DevSpace_7_7.png");
+                return File.OpenRead($"{prefix}_7_7.png");
             }
             if (resolution >= 3)
             {
-                return File.OpenRead("Overlays/DevSpace_5_5.png");
+                return File.OpenRead($"{prefix}_5_5.png");
             }
-            return File.OpenRead("Overlays/DevSpace_3_3.png");
+            return File.OpenRead($"{prefix}_3_3.png");
         }
 
         public void Dispose()

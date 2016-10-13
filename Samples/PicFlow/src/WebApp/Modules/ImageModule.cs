@@ -9,13 +9,9 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {
     public class ImageModule : NancyModule
     {
-        private readonly IFileHandler _fileUploadHandler;
-        private readonly MessageRepository _messageRepository;
 
-        public ImageModule(IFileHandler fileUploadHandler, MessageRepository messageRepository)
+        public ImageModule(IFileHandler fileUploadHandler, MessageRepository messageRepo, ImageRepository imageRepo)
         {
-            _fileUploadHandler = fileUploadHandler;
-            _messageRepository = messageRepository;
 
             Get("/imagerequest", args =>
             {
@@ -34,7 +30,7 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
             {
                 var request = this.Bind<ImageRequest>();
 
-                var uploadResult = await _fileUploadHandler.HandleUpload(request.File.Name, request.File.Value);
+                var uploadResult = await fileUploadHandler.HandleUpload(request.File.Name, request.File.Value);
                 var identity = this.Context.CurrentUser;
                 var userCookie = Request.Cookies.ContainsKey("picflow_webapp_username") ? Request.Cookies["picflow_webapp_username"] : string.Empty;
 
@@ -52,7 +48,7 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                         Message = request.Message
                     };
                     procJob.Successors.Add(uploadJob);
-                    await _messageRepository.SendImageProcessingJob(procJob);
+                    await messageRepo.SendImageProcessingJob(procJob);
                 }
 
                 foreach (var resolution in request.Resolutions)
@@ -71,14 +67,14 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                         Resolution = resolution
                     };
                     procJob.Successors.Add(saveJob);
-                    await _messageRepository.SendImageProcessingJob(procJob);
+                    await messageRepo.SendImageProcessingJob(procJob);
                 }
                 var model = new Home { Message = $"Auftrag mit Bild {request.File?.Name} wurde gestartet"};
+                model.Jobs = await imageRepo.GetProcessingJobs(Guid.Parse(identity.Identity.Name));
+
                 return View["Home", model];
 
             });
-
-
         }
     }
 }

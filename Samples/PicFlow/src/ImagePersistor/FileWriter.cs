@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using FP.DevSpace2016.PicFlow.Contracts;
 using FP.DevSpace2016.PicFlow.Contracts.Dto;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 
@@ -20,7 +19,7 @@ namespace FP.DevSpace2016.PicFlow.ImagePersistor
             var handler = new MongoDbFileHandler(_mongoConnectionString);
             var image = await handler.GetMessageObject<DtoImage>(id);
 
-            using (var sourceStream = File.Open($"{Guid.NewGuid()}.png", FileMode.OpenOrCreate))
+            using (var sourceStream = File.Open($"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}", FileMode.OpenOrCreate))
             {
                 sourceStream.Seek(0, SeekOrigin.End);
                 await sourceStream.WriteAsync(image.Data, 0, image.Data.Length);

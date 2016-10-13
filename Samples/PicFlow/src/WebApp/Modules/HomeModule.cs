@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FP.DevSpace2016.PicFlow.WebApp.Models;
 using Nancy;
 
@@ -6,12 +7,10 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
 {
     public class HomeModule : NancyModule
     {
-        public const string DbCnn = "host=localhost;database=devspace;password=leipzig;username=devspace";
+        
 
-        public HomeModule()
+        public HomeModule(ImageRepository imgRepo)
         {
-            ImageRepository imgRepo = new ImageRepository(DbCnn);
-
             Get("/", async args =>
             {
                 var identity = this.Context.CurrentUser;
@@ -26,6 +25,26 @@ namespace FP.DevSpace2016.PicFlow.WebApp.Modules
                     model.Jobs = await imgRepo.GetProcessingJobs(Guid.Parse(identity.Identity.Name));
                     return View["Home", model];
                 }
+            });
+
+            Get("/images/{jobId}/{imageId}", async args =>
+            {
+                var identity = this.Context.CurrentUser;
+                if (identity == null)
+                {
+                    return HttpStatusCode.Unauthorized;
+                }
+                Guid jobId = Guid.Parse(args.jobId.ToString());
+                Guid imageId = Guid.Parse(args.imageId);
+
+                var job = await imgRepo.GetImageJobById(jobId, Guid.Parse(identity.Identity.Name));
+                var image = job?.Images.FirstOrDefault(x => x.Id == imageId);
+                if (job == null || image == null)
+                {
+                    return HttpStatusCode.NotFound;
+                }
+
+                return new ByteArrayResponse(image.Data, MimeTypes.GetMimeType(job.Filename));
             });
 
             Get("/contact", args => View["Contact"]);
