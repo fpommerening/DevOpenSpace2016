@@ -28,7 +28,7 @@ namespace FP.DevSpace2016.PicFlow.WebApp
         {
             // Bus als Instanz im Container registieren
             container.Register<AuthenticationRepository>().AsSingleton();
-            
+            container.Register(new ImageRepository("host=localhost;database=devspace;password=leipzig;username=devspace"));
             container.Register<IFileHandler, MongoDbFileHandler>(new MongoDbFileHandler("mongodb://localhost"));
             base.ApplicationStartup(container, pipelines);
         }
