@@ -538,7 +538,7 @@ myBus.Send("MyMessageQueue", new MyClassB {});
                             <code data-trim contenteditable>
                                 $ docker run -d --hostname rmqNode3 --name rmqNode3 -p 5674:5672 
     -p 1564:15672 -e RABBITMQ_ERLANG_COOKIE='strenggeheim'
-    --link rmqNode1:rmqNode1 rabbitmq:3-management
+    --link rmqNode1:rmqNode1 --link rmqNode2:rmqNode2 rabbitmq:3-management
                             </code>
                         </pre>
                 </section>
@@ -563,7 +563,7 @@ rabbitmqctl -n rabbit@rmqNode2 start_app
                         <pre>
                         <code data-trim contenteditable>
                             rabbitmqctl -n rabbit@rmqNode3 stop_app
-rabbitmqctl -n rabbit@rmqNode3 join_cluster rabbit@rmqNode1 --RAM
+rabbitmqctl -n rabbit@rmqNode3 join_cluster --ram rabbit@rmqNode1
 rabbitmqctl -n rabbit@rmqNode3 start_app
                               </code>
                         </pre>
@@ -573,7 +573,7 @@ rabbitmqctl -n rabbit@rmqNode3 start_app
                     <a href="https://www.rabbitmq.com/ha.html" target="_blank">Info</a>
                         <pre>
                         <code data-trim contenteditable>
-                         set_policy ha-all "" '{"ha-mode":"all"}'
+                         rabbitmqctl -n rabbit@rmqNode1 set_policy ha-all "" '{"ha-mode":"all"}' 
                               </code>
                         </pre>
 
