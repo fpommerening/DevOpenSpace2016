@@ -1,23 +1,27 @@
 ﻿using System;
 using EasyNetQ;
+using FP.DevSpace2016.PicFlow.Contracts;
 
 namespace FP.DevSpace2016.PicFlow.ImagePersistor
 {
     public class Program
     {
-        public const string DbCnn = "host=localhost;database=devspace;password=leipzig;username=devspace";
-        public const string MongoCnn = "mongodb://localhost";
-        public const string RabbitCnn = "host=localhost";
+       
 
         public static void Main(string[] args)
         {
+            var dbCnn = EnvironmentVariable.GetValueOrDefault("ConnectionStringImageDB",
+                "host=localhost;database=devspace;password=leipzig;username=devspace");
+            var mongoCnn = EnvironmentVariable.GetValueOrDefault("ConnectionStringDocumentDB", "mongodb://localhost");
+            var rabbitCnn = EnvironmentVariable.GetValueOrDefault("ConnectionStringRabbitMQ", "host=localhost");
+
             IBus myBus = null;
             try
             {
-                myBus = RabbitHutch.CreateBus(RabbitCnn);
+                myBus = RabbitHutch.CreateBus(rabbitCnn);
                 myBus.SubscribeAsync<Contracts.Messages.ImageSaveJob>("ImagePersistor", async job =>
                 {
-                    var dbWriter = new DbWriter(MongoCnn, DbCnn);
+                    var dbWriter = new DbWriter(mongoCnn, dbCnn);
                     await dbWriter.PersistImage(job.Id, job.UserId, job.SourceId, job.Message, job.Resolution);
                 });
                     

@@ -14,10 +14,12 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
     {
         private readonly IBus _bus;
         private IDisposable _subscription;
+        private readonly string _imageDbConnectionString;
 
-        public ImageWorker(IBus bus)
+        public ImageWorker(IBus bus, string imageDbConnectionString)
         {
             _bus = bus;
+            _imageDbConnectionString = imageDbConnectionString;
         }
 
         public void Init()
@@ -27,7 +29,7 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
 
         private async Task WorkImage(ImageProcessingJob job)
         {
-            var fileHandler = new MongoDbFileHandler("mongodb://localhost");
+            var fileHandler = new MongoDbFileHandler(_imageDbConnectionString);
             var sourcefile = await fileHandler.GetMessageObject<DtoImage>(job.Id);
 
             var outputfile = AddOverlay(sourcefile, job.Overlay, job.Resolution);

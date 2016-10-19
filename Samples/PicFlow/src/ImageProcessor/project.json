@@ -6,6 +6,7 @@
   },
 
   "dependencies": {
+    "Contracts": "1.0.0-*",
     "EasyNetQ": "2.0.2-netcore0001",
     "ImageProcessorCore": "1.0.0-alpha1058",
     "Microsoft.NETCore.App": {
@@ -16,11 +17,7 @@
 
   "frameworks": {
     "netcoreapp1.0": {
-      "dependencies": {
-        "Contracts": {
-          "target": "project"
-        }
-      },
+      "dependencies": {},
       "imports": "dnxcore50"
     }
   }

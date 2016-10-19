@@ -1,5 +1,6 @@
 ﻿using System;
 using EasyNetQ;
+using FP.DevSpace2016.PicFlow.Contracts;
 
 namespace FP.DevSpace2016.PicFlow.Authorization
 {
@@ -11,8 +12,10 @@ namespace FP.DevSpace2016.PicFlow.Authorization
             IBus myBus = null;
             try
             {
-                myBus = RabbitHutch.CreateBus("host=localhost");
-                var userRepo = new UserRepository("host = localhost; database = devspace; password = leipzig; username = devspace");
+                myBus = RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectionStringRabbitMQ",
+                    "host=localhost"));
+                var userRepo = new UserRepository(EnvironmentVariable.GetValueOrDefault("ConnectionStringImageDB",
+                    "host=localhost;database=devspacepassword=leipzig;username=devspace"));
                 myBus.SubscribeAsync<Contracts.Messages.AuthenticationRequest>("Auth", async request =>
                 {
                     var response = new Contracts.Messages.AuthenticationResponse

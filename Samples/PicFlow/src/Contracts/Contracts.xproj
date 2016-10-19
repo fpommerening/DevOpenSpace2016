@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>c388b076-4e16-42c2-b446-a4e09a54dbf4</ProjectGuid>
-    <RootNamespace>FP.DevSpace2016.PicFlow.Uploader</RootNamespace>
+    <ProjectGuid>ab4d4df9-5d17-48fc-bf89-39b050eb5467</ProjectGuid>
+    <RootNamespace>FP.DevSpace2016.PicFlow.Contracts</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
