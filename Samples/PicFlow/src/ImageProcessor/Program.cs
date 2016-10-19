@@ -1,5 +1,6 @@
 ﻿using System;
 using EasyNetQ;
+using FP.DevSpace2016.PicFlow.Contracts;
 
 namespace FP.DevSpace2016.PicFlow.ImageProcessor
 {
@@ -11,8 +12,9 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
 
             try
             {
-                myBus = RabbitHutch.CreateBus("host=localhost");
-                using (var worker = new ImageWorker(myBus))
+                myBus = RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectionStringRabbitMQ", "host=localhost"));
+                var mongoCnn = EnvironmentVariable.GetValueOrDefault("ConnectionStringDocumentDB", "mongodb://localhost");
+                using (var worker = new ImageWorker(myBus, mongoCnn))
                 {
                     worker.Init();
                     Console.WriteLine("ImageProcessor gestartet...");

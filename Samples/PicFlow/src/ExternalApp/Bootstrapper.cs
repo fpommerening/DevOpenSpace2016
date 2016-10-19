@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using FP.DevSpace2016.PicFlow.ExternalApp.Data;
 using MongoDB.Driver;
 using Nancy;
@@ -22,8 +24,20 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            container.Register<EntryRepository>(new EntryRepository("mongodb://localhost"));
+            container.Register<EntryRepository>(new EntryRepository(GetEnvironmentVariableOrDefault("ConnectionStringEntryDB", "mongodb://localhost")));
             base.ApplicationStartup(container, pipelines);
+        }
+
+        public static string GetEnvironmentVariableOrDefault(string key, string defaultValue)
+        {
+            foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+            {
+                if (de.Key?.ToString() == key)
+                {
+                    return de.Value.ToString();
+                }
+            }
+            return defaultValue;
         }
     }
 }

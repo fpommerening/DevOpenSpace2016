@@ -13,11 +13,13 @@ namespace FP.DevSpace2016.PicFlow.Uploader
         private readonly IBus _myBus;
         private readonly string _mongoConnectionString;
         private IDisposable _subscription;
+        private readonly string _externalAppUrl;
 
-        public Transmitter(IBus myBus, string mongoConnectionstring)
+        public Transmitter(IBus myBus, string mongoConnectionstring, string externalAppUrl)
         {
             _myBus = myBus;
             _mongoConnectionString = mongoConnectionstring;
+            _externalAppUrl = externalAppUrl;
         }
 
         public void Init()
@@ -38,7 +40,7 @@ namespace FP.DevSpace2016.PicFlow.Uploader
                 content.Add(new StringContent(job.Message), "Message");
                 content.Add(new StringContent("devspace2016"), "APIKEY");
                 content.Add(new ByteArrayContent(image.Data), "Image", image.FileName);
-                await client.PostAsync("http://localhost:8000/api/postimage", content);
+                await client.PostAsync(_externalAppUrl, content);
             }
 
         }

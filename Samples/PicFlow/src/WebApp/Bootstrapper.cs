@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Security.Principal;
 using EasyNetQ;
+using FP.DevSpace2016.PicFlow.Contracts;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 using FP.DevSpace2016.PicFlow.WebApp.Modules;
 using Nancy;
@@ -26,10 +27,11 @@ namespace FP.DevSpace2016.PicFlow.WebApp
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            container.Register<IBus>(RabbitHutch.CreateBus("host=localhost"));
-            container.Register(new ImageRepository("host=localhost;database=devspace;password=leipzig;username=devspace"));
+            container.Register<IBus>(RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectionStringRabbitMQ", "host=localhost")));
+            container.Register(new ImageRepository(EnvironmentVariable.GetValueOrDefault("ConnectionStringImageDB", 
+                "host=localhost;database=devspace;password=leipzig;username=devspace")));
             container.Register<AuthenticationRepository>().AsSingleton();
-            container.Register<IFileHandler, MongoDbFileHandler>(new MongoDbFileHandler("mongodb://localhost"));
+            container.Register<IFileHandler, MongoDbFileHandler>(new MongoDbFileHandler(EnvironmentVariable.GetValueOrDefault("ConnectionStringDocumentDB", "mongodb://localhost")));
 
             base.ApplicationStartup(container, pipelines);
         }
