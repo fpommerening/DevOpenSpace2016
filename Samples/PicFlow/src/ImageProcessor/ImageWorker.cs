@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using EasyNetQ;
@@ -7,6 +6,7 @@ using FP.DevSpace2016.PicFlow.Contracts.Dto;
 using FP.DevSpace2016.PicFlow.Contracts.FileHandler;
 using FP.DevSpace2016.PicFlow.Contracts.Messages;
 using ImageProcessorCore;
+using EasyNetQ.NonGeneric;
 
 namespace FP.DevSpace2016.PicFlow.ImageProcessor
 {
@@ -36,20 +36,9 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
             foreach (var successor in job.Successors)
             {
                 successor.Id = id;
-                var saveJob = successor as ImageSaveJob;
-                if (saveJob != null)
-                {
-                    await _bus.PublishAsync(saveJob);
-                }
-                var uploadJob = successor as ImageUploadJob;
-                if (uploadJob != null)
-                {
-                    await _bus.PublishAsync(uploadJob);
-                }
+                await _bus.PublishAsync(successor.GetType(), successor);
             }
         }
-
-
 
         private DtoImage AddOverlay(DtoImage sourcefile, string overlayId, int resolution)
         {
@@ -112,9 +101,5 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
             _subscription?.Dispose();
             _subscription = null;
         }
-
-        
     }
-
-    
 }
