@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FP.DevSpace2016.Logging.Contacts
+namespace FP.DevSpace2016.Logging.Contracts
 {
     public class LogItem
     {

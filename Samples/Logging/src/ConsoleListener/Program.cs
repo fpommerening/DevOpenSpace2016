@@ -1,6 +1,6 @@
 ﻿using System;
 using EasyNetQ;
-using FP.DevSpace2016.Logging.Contacts;
+using FP.DevSpace2016.Logging.Contracts;
 
 namespace FP.DevSpace2016.Logging.ConsoleListener
 {
@@ -12,7 +12,7 @@ namespace FP.DevSpace2016.Logging.ConsoleListener
 
             try
             {
-                myBus = RabbitHutch.CreateBus("host=RabbitMQ");
+                myBus = RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectingStringRabbitMQ", "host=localhost"));
                 myBus.Subscribe<LogItem>("ConsoleLogger", log =>
                 {
                     Console.WriteLine("{0:HH:mm:ss.fff} [{1}] {2} -> {3} {4}",
