@@ -5,7 +5,7 @@
   },
 
   "dependencies": {
-    "Contacts": "1.0.0-*",
+    "Contracts": "1.0.0-*",
     "EasyNetQ": "2.0.2-netcore0001",
     "Microsoft.NETCore.App": {
       "type": "platform",

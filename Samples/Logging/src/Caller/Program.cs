@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -45,7 +46,9 @@ namespace FP.DevSpace2016.Logging.Caller
             for (int i = 1; i <= number; i++)
             {
                 var client = new HttpClient();
-                var request = string.Format("http://loadbalancer/Service/{0}", Guid.NewGuid());
+                var targetUrl = GetEnvironmentVariableOrDefault("TargetUrl", "http://localhost8080/Service/");
+
+                var request = string.Format("{0}{1}", targetUrl, Guid.NewGuid());
 
                 var t = client.GetStringAsync(request).ContinueWith(r =>
                 {
@@ -60,7 +63,7 @@ namespace FP.DevSpace2016.Logging.Caller
                 });
                 tasks.Add(t);
 
-                if (i % 15 == 0)
+                if (i%15 == 0)
                 {
                     await Task.WhenAll(tasks);
                     tasks.Clear();
@@ -68,5 +71,20 @@ namespace FP.DevSpace2016.Logging.Caller
             }
             await Task.WhenAll(tasks);
         }
+
+        public static string GetEnvironmentVariableOrDefault(string key, string defaultValue)
+        {
+            foreach (DictionaryEntry de in Environment.GetEnvironmentVariables())
+            {
+                if (de.Key?.ToString() == key)
+                {
+                    return de.Value.ToString();
+                }
+            }
+            return defaultValue;
+
+        }
     }
 }
+
+

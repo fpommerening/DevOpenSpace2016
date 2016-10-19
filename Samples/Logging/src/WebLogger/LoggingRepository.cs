@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using FP.DevSpace2016.Logging.Contacts;
+using FP.DevSpace2016.Logging.Contracts;
 using EasyNetQ;
 
 namespace FP.DevSpace2016.Logging.WebLogger
@@ -37,7 +37,7 @@ namespace FP.DevSpace2016.Logging.WebLogger
         private IBus bus = null;
         private IBus GetOrCreateBus()
         {
-            return bus ?? (bus = RabbitHutch.CreateBus("host=RabbitMQ"));
+            return bus ?? (bus = RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectingStringRabbitMQ", "host=localhost")));
         }
     }
 }

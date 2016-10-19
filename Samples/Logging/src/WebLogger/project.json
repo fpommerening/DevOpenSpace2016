@@ -13,7 +13,7 @@
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.Owin": "1.0.0",
     "Nancy": "2.0.0-barneyrubble",
-    "Contacts": "1.0.0-*"
+    "Contracts": "1.0.0-*"
   },
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel"
