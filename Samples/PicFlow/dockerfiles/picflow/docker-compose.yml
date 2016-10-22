@@ -28,6 +28,10 @@ services:
     hostname: webapp
     ports:
       - 8000:8000
+    environment:
+      - ConnectionStringRabbitMQ=host=RabbitMQ
+      - ConnectionStringImageDB=host=ImageDB;database=devspace;password=leipzig;username=devspace
+      - ConnectionStringDocumentDB=mongodb://DocumentDB
     
   ExtApp:
     image: fpommerening/devopenspace2016:picflow-extapp
@@ -38,6 +42,8 @@ services:
     hostname: extapp
     ports:
       - 5000:5000
+    environment:
+      - ConnectionStringEntryDB=mongodb://ExternalDB
     
   Uploader:
     image: fpommerening/devopenspace2016:picflow-uploader
@@ -46,6 +52,10 @@ services:
       - DocumentDB
       - ExtApp
     hostname: uploader
+    environment:
+      - ConnectionStringRabbitMQ=host=RabbitMQ
+      - ConnectionStringImageDB=host=ImageDB;database=devspace;password=leipzig;username=devspace
+      - ExternalAppUrl=http://extapp:8000/api/postimage
     
   Processor:
     image: fpommerening/devopenspace2016:picflow-processor
@@ -53,6 +63,19 @@ services:
       - RabbitMQ
       - DocumentDB
     hostname: processor
+    environment:
+      - ConnectionStringRabbitMQ=host=RabbitMQ
+      - ConnectionStringDocumentDB=mongodb://DocumentDB
+    
+  Authorization:
+    image: fpommerening/devopenspace2016:picflow-authorization
+    depends_on:
+      - RabbitMQ
+      - DocumentDB
+    hostname: authorization
+    environment:
+      - ConnectionStringRabbitMQ=host=RabbitMQ
+      - ConnectionStringImageDB=host=ImageDB;database=devspace;password=leipzig;username=devspace
     
   Persistor:
     image: fpommerening/devopenspace2016:picflow-persistor
@@ -61,7 +84,8 @@ services:
       - ImageDB
       - DocumentDB
     hostname: persistor
-    
-  
-  
+    environment:
+      - ConnectionStringRabbitMQ=host=RabbitMQ
+      - ConnectionStringImageDB=host=ImageDB;database=devspace;password=leipzig;username=devspace
+      - ConnectionStringDocumentDB=mongodb://DocumentDB
 
