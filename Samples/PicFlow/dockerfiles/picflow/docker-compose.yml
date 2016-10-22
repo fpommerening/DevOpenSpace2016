@@ -20,7 +20,7 @@ services:
     image: mongo:3.2
 
   WebApp:
-    image: fpommerening/devopenspace2016:pic-webapp
+    image: fpommerening/devopenspace2016:picflow-webapp
     depends_on:
       - RabbitMQ
       - ImageDB
@@ -30,7 +30,7 @@ services:
       - 8000:8000
     
   ExtApp:
-    image: fpommerening/devopenspace2016:pic-extapp
+    image: fpommerening/devopenspace2016:picflow-extapp
     depends_on:
       - RabbitMQ
       - ImageDB
@@ -40,7 +40,7 @@ services:
       - 5000:5000
     
   Uploader:
-    image: fpommerening/devopenspace2016:pic-uploader
+    image: fpommerening/devopenspace2016:picflow-uploader
     depends_on:
       - RabbitMQ
       - DocumentDB
@@ -48,14 +48,14 @@ services:
     hostname: uploader
     
   Processor:
-    image: fpommerening/devopenspace2016:pic-processor
+    image: fpommerening/devopenspace2016:picflow-processor
     depends_on:
       - RabbitMQ
       - DocumentDB
     hostname: processor
     
   Persistor:
-    image: fpommerening/devopenspace2016:pic-persistor
+    image: fpommerening/devopenspace2016:picflow-persistor
     depends_on:
       - RabbitMQ
       - ImageDB

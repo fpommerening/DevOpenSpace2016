@@ -25,7 +25,7 @@ services:
     image: fpommerening/devopenspace2016:core-base
 
   image-db:
-    image: fpommerening/devopenspace2016:image-database
+    image: fpommerening/devopenspace2016:picflow-database
 
   web:
     depends_on:
