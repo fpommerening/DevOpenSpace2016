@@ -1,0 +1,67 @@
+version: '2'
+services: 
+  RabbitMQ:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:7672
+      - 15672:15672
+  
+  ImageDB:
+    image: fpommerening/devopenspace2016:picflow-database
+    ports:
+      - 5432:5432
+  
+  DocumentDB:
+    image: mongo:3.2
+    ports:
+      - 27017:27017
+    
+  ExternalDB:
+    image: mongo:3.2
+
+  WebApp:
+    image: fpommerening/devopenspace2016:pic-webapp
+    depends_on:
+      - RabbitMQ
+      - ImageDB
+      - DocumentDB
+    hostname: webapp
+    ports:
+      - 8000:8000
+    
+  ExtApp:
+    image: fpommerening/devopenspace2016:pic-extapp
+    depends_on:
+      - RabbitMQ
+      - ImageDB
+      - DocumentDB
+    hostname: extapp
+    ports:
+      - 5000:5000
+    
+  Uploader:
+    image: fpommerening/devopenspace2016:pic-uploader
+    depends_on:
+      - RabbitMQ
+      - DocumentDB
+      - ExtApp
+    hostname: uploader
+    
+  Processor:
+    image: fpommerening/devopenspace2016:pic-processor
+    depends_on:
+      - RabbitMQ
+      - DocumentDB
+    hostname: processor
+    
+  Persistor:
+    image: fpommerening/devopenspace2016:pic-persistor
+    depends_on:
+      - RabbitMQ
+      - ImageDB
+      - DocumentDB
+    hostname: persistor
+    
+  
+  
+
