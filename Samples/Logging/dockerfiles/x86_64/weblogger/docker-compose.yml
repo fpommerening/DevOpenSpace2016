@@ -1,6 +1,6 @@
 version: '2'
 services: 
-  RabbitMQ:
+  rabbitmq:
     image: rabbitmq:3-management
     ports:
       - 5672:7672
@@ -11,18 +11,24 @@ services:
     depends_on:
       - RabbitMQ
     hostname: weblogger1
+    environment:
+      - ConnectingStringRabbitMQ=host=rabbitmq
     
   weblogger2:
     image: fpommerening/devopenspace2016:logging-web
     depends_on:
       - RabbitMQ
     hostname: weblogger2
+    environment:
+      - ConnectingStringRabbitMQ=host=rabbitmq
 
   weblogger3:
     image: fpommerening/devopenspace2016:logging-web
     depends_on:
       - RabbitMQ
     hostname: weblogger3
+    environment:
+      - ConnectingStringRabbitMQ=host=rabbitmq
 
   loadbalancer:
     image: fpommerening/devopenspace2016:logging-loadbalancer
@@ -45,3 +51,5 @@ services:
     depends_on: 
       - loadbalancer
     hostname: loggingcaller
+    environment:
+      - TargetUrl=http://loadbalancer:8080/Service/
