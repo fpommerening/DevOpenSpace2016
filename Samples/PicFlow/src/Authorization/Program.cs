@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using EasyNetQ;
 using FP.DevSpace2016.PicFlow.Contracts;
 
@@ -35,7 +36,7 @@ namespace FP.DevSpace2016.PicFlow.Authorization
                 });
 
                 Console.WriteLine("Authorization gestartet...");
-                Console.ReadLine();
+                while (Console.ReadLine() != "quit") { Thread.Sleep(int.MaxValue); }
             }
             catch (Exception ex)
             {
