@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using EasyNetQ;
 using FP.DevSpace2016.PicFlow.Contracts;
 
@@ -13,13 +14,13 @@ namespace FP.DevSpace2016.PicFlow.Uploader
             try
             {
                 myBus = RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectionStringRabbitMQ", "host=localhost"));
-                var cnnImageDb = EnvironmentVariable.GetValueOrDefault("ConnectionStringImageDB", "mongodb://localhost");
+                var cnnImageDb = EnvironmentVariable.GetValueOrDefault("ConnectionStringDocumentDB", "mongodb://localhost");
                 var externalAppUrl = EnvironmentVariable.GetValueOrDefault("ExternalAppUrl", "http://localhost:8000/api/postimage");
                 using (var transmittter = new Transmitter(myBus, cnnImageDb, externalAppUrl))
                 {
                     transmittter.Init();
                     Console.WriteLine("Uploader gestartet...");
-                    Console.ReadLine();
+                    while (Console.ReadLine() != "quit") { Thread.Sleep(int.MaxValue); }
                 }
             }
             catch (Exception ex)

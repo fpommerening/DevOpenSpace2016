@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using EasyNetQ;
 using FP.DevSpace2016.PicFlow.Contracts;
 
@@ -18,7 +19,7 @@ namespace FP.DevSpace2016.PicFlow.ImageProcessor
                 {
                     worker.Init();
                     Console.WriteLine("ImageProcessor gestartet...");
-                    Console.ReadLine();
+                    while (Console.ReadLine() != "quit") { Thread.Sleep(int.MaxValue); }
                 }
             }
             catch (Exception ex)
