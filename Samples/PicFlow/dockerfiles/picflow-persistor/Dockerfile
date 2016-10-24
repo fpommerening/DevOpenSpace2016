@@ -1,7 +1,7 @@
 FROM fpommerening/devopenspace2016:core-base
 MAINTAINER Frank Pommerening "frank@pommerening-online.de"
-ENV REFRESHED_AT 2016-10-22
-ENV Picflow_VERSION 0.1.0
+ENV REFRESHED_AT 2016-10-24
+ENV Picflow_VERSION 0.1.1
 
 # COPY /app /home/
 
