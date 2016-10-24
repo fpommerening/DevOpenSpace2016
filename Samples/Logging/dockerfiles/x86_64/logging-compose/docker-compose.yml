@@ -9,7 +9,7 @@ services:
   weblogger1:
     image: fpommerening/devopenspace2016:logging-web
     depends_on:
-      - RabbitMQ
+      - rabbitmq
     hostname: weblogger1
     environment:
       - ConnectingStringRabbitMQ=host=rabbitmq
@@ -17,7 +17,7 @@ services:
   weblogger2:
     image: fpommerening/devopenspace2016:logging-web
     depends_on:
-      - RabbitMQ
+      - rabbitmq
     hostname: weblogger2
     environment:
       - ConnectingStringRabbitMQ=host=rabbitmq
@@ -25,7 +25,7 @@ services:
   weblogger3:
     image: fpommerening/devopenspace2016:logging-web
     depends_on:
-      - RabbitMQ
+      - rabbitmq
     hostname: weblogger3
     environment:
       - ConnectingStringRabbitMQ=host=rabbitmq
@@ -43,7 +43,7 @@ services:
 # logconsole:
 #   image: fpommerening/devopenspace2016:logging-console
 #   depends_on: 
-#     - RabbitMQ
+#     - rabbitmq
 #   hostname: logconsole
 
   loggingcaller:
