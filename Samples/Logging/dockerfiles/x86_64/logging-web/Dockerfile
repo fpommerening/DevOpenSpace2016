@@ -1,7 +1,7 @@
 FROM fpommerening/devopenspace2016:core-base
 MAINTAINER Frank Pommerening "frank@pommerening-online.de"
-ENV REFRESHED_AT 2016-10-12
-ENV Web_VERSION 0.0.5
+ENV REFRESHED_AT 2016-10-24
+ENV Web_VERSION 0.1.1
 
 
 RUN set -x \

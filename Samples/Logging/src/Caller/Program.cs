@@ -46,7 +46,7 @@ namespace FP.DevSpace2016.Logging.Caller
             for (int i = 1; i <= number; i++)
             {
                 var client = new HttpClient();
-                var targetUrl = GetEnvironmentVariableOrDefault("TargetUrl", "http://localhost8080/Service/");
+                var targetUrl = GetEnvironmentVariableOrDefault("TargetUrl", "http://localhost:8080/Service/");
 
                 var request = string.Format("{0}{1}", targetUrl, Guid.NewGuid());
 
