@@ -27,14 +27,18 @@ namespace FP.DevSpace2016.PicFlow.WebApp
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            container.Register<IBus>(RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectionStringRabbitMQ", "host=localhost")));
+            var bus = RabbitHutch.CreateBus(EnvironmentVariable.GetValueOrDefault("ConnectionStringRabbitMQ", "host=localhost"));
+            container.Register<IBus>(bus);
             container.Register(new ImageRepository(EnvironmentVariable.GetValueOrDefault("ConnectionStringImageDB", 
                 "host=localhost;database=devspace;password=leipzig;username=devspace")));
-            container.Register<AuthenticationRepository>().AsSingleton();
+            var authenticationRepository = new AuthenticationRepository(bus);
+            container.Register<AuthenticationRepository>(authenticationRepository);
             container.Register<IFileHandler, MongoDbFileHandler>(new MongoDbFileHandler(EnvironmentVariable.GetValueOrDefault("ConnectionStringDocumentDB", "mongodb://localhost")));
 
             base.ApplicationStartup(container, pipelines);
         }
+
+      
 
         protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
         {

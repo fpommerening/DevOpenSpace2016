@@ -7,17 +7,29 @@ namespace FP.DevSpace2016.PicFlow.Authorization
 {
     public class UserRepository
     {
-        private readonly IDocumentStore _store;
+        private IDocumentStore _store;
+        private readonly string _connectionString;
+        private static readonly object SyncRoot = new object();
 
         public UserRepository(string connectionString)
         {
-            _store = DocumentStore.For(connectionString);
-           
+            _connectionString = connectionString;
+        }
+
+        private IDocumentStore Store
+        {
+            get
+            {
+                lock (SyncRoot)
+                {
+                    return _store ?? (_store = DocumentStore.For(_connectionString));
+                }
+            }
         }
 
         public async Task<UserInfo> CheckUser(string username, string passwordhash)
         {
-            using (var session = _store.OpenSession())
+            using (var session = Store.OpenSession())
             {
                 var existingUser = await session.Query<User>().Where(x => x.UserName == username && x.PasswordHash == passwordhash).FirstOrDefaultAsync();
                 if (existingUser == null)
