@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.ComponentModel.DataAnnotations;
 using FP.DevSpace2016.PicFlow.ExternalApp.Data;
-using MongoDB.Driver;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
@@ -34,9 +32,11 @@ namespace FP.DevSpace2016.PicFlow.ExternalApp
             {
                 if (de.Key?.ToString() == key)
                 {
+                    Console.WriteLine($"GetEnvVar {key} - {de.Value}");
                     return de.Value.ToString();
                 }
             }
+            Console.WriteLine($"GetEnvVar {key} - default - {defaultValue}");
             return defaultValue;
         }
     }
