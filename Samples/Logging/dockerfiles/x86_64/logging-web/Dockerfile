@@ -3,6 +3,7 @@ MAINTAINER Frank Pommerening "frank@pommerening-online.de"
 ENV REFRESHED_AT 2016-10-24
 ENV Web_VERSION 0.1.1
 
+# COPY /app /home/
 
 RUN set -x \
 	&& wget -O /home/logging-web.7z "https://github.com/fpommerening/DevOpenSpace2016/releases/download/$Web_VERSION/logging-web.7z" \
