@@ -42,11 +42,11 @@ namespace FP.DevSpace2016.Logging.Caller
         private static async Task StartRequests(int number)
         {
             var tasks = new List<Task>();
+            var targetUrl = GetEnvironmentVariableOrDefault("TargetUrl", "http://localhost:8080/Service/");
 
             for (int i = 1; i <= number; i++)
             {
                 var client = new HttpClient();
-                var targetUrl = GetEnvironmentVariableOrDefault("TargetUrl", "http://localhost:8080/Service/");
 
                 var request = string.Format("{0}{1}", targetUrl, Guid.NewGuid());
 
@@ -78,9 +78,11 @@ namespace FP.DevSpace2016.Logging.Caller
             {
                 if (de.Key?.ToString() == key)
                 {
+                    Console.WriteLine($"GetEnvVar {key} - {de.Value}");
                     return de.Value.ToString();
                 }
             }
+            Console.WriteLine($"GetEnvVar {key} - default - {defaultValue}");
             return defaultValue;
 
         }

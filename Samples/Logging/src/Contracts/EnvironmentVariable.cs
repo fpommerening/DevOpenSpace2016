@@ -11,9 +11,11 @@ namespace FP.DevSpace2016.Logging.Contracts
             {
                 if (de.Key?.ToString() == key)
                 {
+                    Console.WriteLine($"GetEnvVar {key} - {de.Value}");
                     return de.Value.ToString();
                 }
             }
+            Console.WriteLine($"GetEnvVar {key} - default - {defaultValue}");
             return defaultValue;
         }
     }
