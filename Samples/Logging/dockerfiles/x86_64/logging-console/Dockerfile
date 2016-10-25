@@ -1,7 +1,7 @@
 FROM fpommerening/devopenspace2016:core-base
 MAINTAINER Frank Pommerening "frank@pommerening-online.de"
-ENV REFRESHED_AT 2016-10-24
-ENV Console_VERSION 0.1.1
+ENV REFRESHED_AT 2016-10-25
+ENV Console_VERSION 0.1.2
 
 # COPY /app /home/
 
