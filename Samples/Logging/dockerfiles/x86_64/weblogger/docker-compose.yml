@@ -52,4 +52,4 @@ services:
       - loadbalancer
     hostname: loggingcaller
     environment:
-      - TargetUrl=http://loadbalancer:8080/Service/
+      - TargetUrl=http://loadbalancer:80/Service/
