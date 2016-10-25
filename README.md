@@ -52,4 +52,3 @@ Der Fokus liegt des Workshops liegt auf der Implementierung der .Net-Microservic
 Um die korrekte Funktion der Dockerumgebung zu testen startet bitte die <a href="startupApp.md" > StartUp-App </a>.
 
 <b>Die Präsentation könnt ihr auf der <a href="http://fpommerening.github.io/DevOpenSpace2016/index.html">GitHub-Page</a> einsehen.</b>
-Hinweis: die finale Version wir erst nach dem Workshop bereitgestellt.
