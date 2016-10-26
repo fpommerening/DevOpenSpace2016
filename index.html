@@ -604,6 +604,7 @@ rabbitmqctl -n rabbit@rmqNode3 start_app
                         <pre>
                             <code data-trim contenteditable>
                                 $ docker run -it --rm --name logconsole 
+-e ConnectingStringRabbitMQ=host=rabbitmq
 --net compose_default
 fpommerening/devopenspace2016:logging-console
                             </code>
